@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/Meet"
+        android:enabled="true"
+        android:icon="@drawable/videocam"
+        android:title="Meet" />
+    <item
+        android:id="@+id/QR_Code"
+        android:icon="@drawable/qr_code_scanner"
+        android:title="QR Scanner" />
+<!--    <item-->
+<!--        android:id="@+id/Examination"-->
+<!--        android:icon="@drawable/ic_baseline_assignment_24"-->
+<!--        android:title="Examination" />-->
+    <item
+        android:id="@+id/Notice"
+        android:icon="@drawable/email_icon"
+        android:title="Nitoce" />
+
+    <item
+        android:id="@+id/Account"
+        android:icon="@drawable/person_icon"
+        android:title="Account" />
+</menu>
