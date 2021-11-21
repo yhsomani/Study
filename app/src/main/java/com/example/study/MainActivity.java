@@ -1,14 +1,15 @@
 package com.example.study;
 
-import androidx.annotation.ColorInt;
+import static android.R.color.black;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
-import android.graphics.ColorFilter;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.provider.CalendarContract;
@@ -20,15 +21,16 @@ public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigation;
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setCustomView(R.layout.action_bar);
-        ColorDrawable colorDrawable
-                = new ColorDrawable(Color.parseColor("#31E373"));
-        getSupportActionBar().setBackgroundDrawable(colorDrawable);
+        getSupportActionBar().setTitle("Study");
+        getSupportActionBar().setBackgroundDrawable(getDrawable(R.drawable.background_border));
         bottomNavigation = findViewById(R.id.bottom_navigation);
         bottomNavigation.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
         openFragment(MeetFragment.newInstance("", ""));

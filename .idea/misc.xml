@@ -7,15 +7,20 @@
         <entry key="..\:/Users/ysoma/AndroidStudioProjects/Study/app/src/main/res/drawable-v24/ic_mobile_login_bro.xml" value="0.290625" />
         <entry key="..\:/Users/ysoma/AndroidStudioProjects/Study/app/src/main/res/drawable-v24/login_background.xml" value="0.290625" />
         <entry key="..\:/Users/ysoma/AndroidStudioProjects/Study/app/src/main/res/drawable-v24/loginscreen_img.xml" value="0.16041666666666668" />
+        <entry key="..\:/Users/ysoma/AndroidStudioProjects/Study/app/src/main/res/drawable-v24/textbox.xml" value="0.26851851851851855" />
+        <entry key="..\:/Users/ysoma/AndroidStudioProjects/Study/app/src/main/res/drawable/action_bar.xml" value="0.26851851851851855" />
         <entry key="..\:/Users/ysoma/AndroidStudioProjects/Study/app/src/main/res/drawable/actionbar.xml" value="0.23981481481481481" />
+        <entry key="..\:/Users/ysoma/AndroidStudioProjects/Study/app/src/main/res/drawable/background_border.xml" value="0.15989583333333332" />
         <entry key="..\:/Users/ysoma/AndroidStudioProjects/Study/app/src/main/res/drawable/ic_round_lock_24.xml" value="0.290625" />
         <entry key="..\:/Users/ysoma/AndroidStudioProjects/Study/app/src/main/res/drawable/ic_visibility.xml" value="0.23981481481481481" />
         <entry key="..\:/Users/ysoma/AndroidStudioProjects/Study/app/src/main/res/drawable/login_background.xml" value="0.16041666666666668" />
         <entry key="..\:/Users/ysoma/AndroidStudioProjects/Study/app/src/main/res/drawable/qr_code_scanner.xml" value="0.2212962962962963" />
         <entry key="..\:/Users/ysoma/AndroidStudioProjects/Study/app/src/main/res/layout/action_bar.xml" value="0.27447916666666666" />
-        <entry key="..\:/Users/ysoma/AndroidStudioProjects/Study/app/src/main/res/layout/activity_login.xml" value="0.20199275362318841" />
+        <entry key="..\:/Users/ysoma/AndroidStudioProjects/Study/app/src/main/res/layout/activity_login.xml" value="0.16" />
         <entry key="..\:/Users/ysoma/AndroidStudioProjects/Study/app/src/main/res/layout/activity_main.xml" value="0.1787037037037037" />
+        <entry key="..\:/Users/ysoma/AndroidStudioProjects/Study/app/src/main/res/layout/fragment_account.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/ysoma/AndroidStudioProjects/Study/app/src/main/res/layout/fragment_login.xml" value="0.4" />
+        <entry key="..\:/Users/ysoma/AndroidStudioProjects/Study/app/src/main/res/layout/fragment_meet.xml" value="0.4" />
         <entry key="..\:/Users/ysoma/AndroidStudioProjects/Study/app/src/main/res/layout/fragment_register.xml" value="0.25" />
         <entry key="..\:/Users/ysoma/AndroidStudioProjects/Study/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.27447916666666666" />
       </map>

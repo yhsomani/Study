@@ -36,18 +36,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <!--                        <com.google.android.material.tabs.TabItem-->
-            <!--                            android:id="@+id/loginFragement"-->
-            <!--                            android:layout_width="wrap_content"-->
-            <!--                            android:layout_height="wrap_content"-->
-            <!--                            android:text="Login" />-->
+<!--            <com.google.android.material.tabs.TabItem-->
+<!--                android:id="@+id/loginFragement"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Login" />-->
 
 
-            <!--                        <com.google.android.material.tabs.TabItem-->
-            <!--                            android:id="@+id/registerFragement"-->
-            <!--                            android:layout_width="wrap_content"-->
-            <!--                            android:layout_height="wrap_content"-->
-            <!--                            android:text="Register" />-->
+<!--            <com.google.android.material.tabs.TabItem-->
+<!--                android:id="@+id/registerFragement"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Register" />-->
 
         </com.google.android.material.tabs.TabLayout>
 
