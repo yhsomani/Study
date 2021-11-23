@@ -5,11 +5,14 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,6 +22,8 @@ import android.widget.EditText;
 public class LoginFragment extends Fragment {
 
     Button login_btn;
+    ImageButton visibility;
+    Boolean icon = true;
     EditText et_email, et_password;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -71,7 +76,25 @@ public class LoginFragment extends Fragment {
 
         login_btn =view.findViewById(R.id.login_btn);
         et_email = view.findViewById(R.id.login_email);
+        visibility = view.findViewById(R.id.imageButton);
         et_password = view.findViewById(R.id.login_password);
+
+        visibility.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (icon) {
+                    et_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    visibility.setImageResource(R.drawable.ic_invisibility);
+                    et_password.setHint("Password");
+                    icon = false;
+                } else {
+                    et_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    visibility.setImageResource(R.drawable.ic_visibility);
+                    et_password.setHint("********");
+                    icon = true;
+                }
+            }
+        });
 
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
