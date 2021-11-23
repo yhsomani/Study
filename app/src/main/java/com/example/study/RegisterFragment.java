@@ -89,10 +89,12 @@ public class RegisterFragment extends Fragment {
                 if (icon) {
                     et_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                     visibility.setImageResource(R.drawable.ic_invisibility);
+                    et_password.setHint("Password");
                     icon = false;
                 } else {
                     et_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
                     visibility.setImageResource(R.drawable.ic_visibility);
+                    et_password.setHint("********");
                     icon = true;
                 }
             }
