@@ -36,7 +36,7 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
         <EditText
-            android:id="@+id/codeBox"
+            android:id="@+id/secretCodeBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -45,7 +45,7 @@
             android:backgroundTint="#6E6D6D"
             android:ems="10"
             android:gravity="center"
-            android:hint="Enter Secret Code"
+            android:hint="Enter Code"
             android:inputType="textPersonName"
             android:minHeight="48dp"
             android:padding="10dp"
@@ -56,25 +56,37 @@
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/joinBtn"
             android:layout_width="125dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginTop="30dp"
             android:drawableEnd="@drawable/videocam"
             android:text="Join"
-            app:layout_constraintStart_toStartOf="@+id/codeBox"
-            app:layout_constraintTop_toBottomOf="@+id/codeBox" />
+            app:layout_constraintStart_toStartOf="@+id/secretCodeBox"
+            app:layout_constraintTop_toBottomOf="@+id/secretCodeBox" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/createBtn"
             android:layout_width="125dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="28dp"
             android:layout_marginEnd="40dp"
+            android:drawableEnd="@drawable/videocam"
+            android:text="Create"
+            app:layout_constraintEnd_toEndOf="@+id/secretCodeBox"
+            app:layout_constraintTop_toBottomOf="@+id/secretCodeBox" />
+
+        <Button
+            android:id="@+id/shareBtn"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#F0A500"
             android:drawableEnd="@drawable/ic_round_share_24"
             android:text="Share"
-            app:layout_constraintEnd_toEndOf="@+id/codeBox"
-            app:layout_constraintTop_toBottomOf="@+id/codeBox" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/createBtn" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
