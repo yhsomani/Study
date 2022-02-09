@@ -2,14 +2,21 @@ package com.example.study;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+
+import androidx.fragment.app.Fragment;
+
+import org.jitsi.meet.sdk.JitsiMeet;
+import org.jitsi.meet.sdk.JitsiMeetActivity;
+import org.jitsi.meet.sdk.JitsiMeetConferenceOptions;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -64,16 +71,37 @@ public class MeetFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_meet, container, false);
-        secretCodeBox =view.findViewById(R.id.secretCodeBox);
+        secretCodeBox = view.findViewById(R.id.secretCodeBox);
         createBtn = view.findViewById(R.id.createBtn);
         joinBtn = view.findViewById(R.id.joinBtn);
         shareBtn = view.findViewById(R.id.shareBtn);
+
+        URL serverURL;
+        try {
+            serverURL = new URL("https://meet.jit.si");
+            JitsiMeetConferenceOptions defaultOptions = new JitsiMeetConferenceOptions.Builder().setServerURL(serverURL)
+                    .setWelcomePageEnabled(false).build();
+            JitsiMeet.setDefaultConferenceOptions(defaultOptions);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        joinBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                JitsiMeetConferenceOptions options = new JitsiMeetConferenceOptions.Builder()
+                        .setRoom(secretCodeBox.getText().toString())
+                        .setWelcomePageEnabled(false)
+                        .build();
+
+                JitsiMeetActivity.launch(getContext(), options);
+            }
+        });
 
         shareBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(android.content.Intent.ACTION_SEND);
-                String shareBody = "Required Meeting Code: "+ secretCodeBox.getText().toString();
+                String shareBody = "Required Meeting Code: " + secretCodeBox.getText().toString();
                 intent.setType("text/plain");
 //                intent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Study");
                 intent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
