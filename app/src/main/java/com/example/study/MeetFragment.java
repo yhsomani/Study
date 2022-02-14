@@ -79,8 +79,7 @@ public class MeetFragment extends Fragment {
         URL serverURL;
         try {
             serverURL = new URL("https://meet.jit.si");
-            JitsiMeetConferenceOptions defaultOptions = new JitsiMeetConferenceOptions.Builder().setServerURL(serverURL)
-                    .setWelcomePageEnabled(false).build();
+            JitsiMeetConferenceOptions defaultOptions = new JitsiMeetConferenceOptions.Builder().setServerURL(serverURL).build();
             JitsiMeet.setDefaultConferenceOptions(defaultOptions);
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -90,7 +89,6 @@ public class MeetFragment extends Fragment {
             public void onClick(View v) {
                 JitsiMeetConferenceOptions options = new JitsiMeetConferenceOptions.Builder()
                         .setRoom(secretCodeBox.getText().toString())
-                        .setWelcomePageEnabled(false)
                         .build();
 
                 JitsiMeetActivity.launch(getContext(), options);
