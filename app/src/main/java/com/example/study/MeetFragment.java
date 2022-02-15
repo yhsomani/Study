@@ -32,10 +32,6 @@ public class MeetFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     public MeetFragment() {
         // Required empty public constructor
     }
@@ -62,8 +58,9 @@ public class MeetFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            // TODO: Rename and change types of parameters
+            getArguments().getString(ARG_PARAM1);
+            getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -84,27 +81,29 @@ public class MeetFragment extends Fragment {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        joinBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                JitsiMeetConferenceOptions options = new JitsiMeetConferenceOptions.Builder()
-                        .setRoom(secretCodeBox.getText().toString())
-                        .build();
+        joinBtn.setOnClickListener(v -> {
+            JitsiMeetConferenceOptions options = new JitsiMeetConferenceOptions.Builder()
+                    .setRoom(secretCodeBox.getText().toString())
+                    .build();
 
-                JitsiMeetActivity.launch(getContext(), options);
-            }
+            JitsiMeetActivity.launch(requireContext(), options);
         });
 
-        shareBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(android.content.Intent.ACTION_SEND);
-                String shareBody = "Required Meeting Code: " + secretCodeBox.getText().toString();
-                intent.setType("text/plain");
+        createBtn.setOnClickListener(v -> {
+            JitsiMeetConferenceOptions options = new JitsiMeetConferenceOptions.Builder()
+                    .setRoom(secretCodeBox.getText().toString())
+                    .build();
+
+            JitsiMeetActivity.launch(requireContext(), options);
+        });
+
+        shareBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            String shareBody = "Required Meeting Code: " + secretCodeBox.getText().toString();
+            intent.setType("text/plain");
 //                intent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Study");
-                intent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
-                startActivity(intent);
-            }
+            intent.putExtra(Intent.EXTRA_TEXT, shareBody);
+            startActivity(intent);
         });
         // Inflate the layout for this fragment
         return view;
