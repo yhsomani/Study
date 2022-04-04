@@ -16,7 +16,7 @@
     <item
         android:id="@+id/Notice"
         android:icon="@drawable/email_icon"
-        android:title="Nitoce" />
+        android:title="Notice" />
 
     <item
         android:id="@+id/Account"

@@ -3,6 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/suyas/AndroidStudioProjects/Study/app/src/main/res/layout/action_bar.xml" value="0.25" />
+        <entry key="..\:/Users/suyas/AndroidStudioProjects/Study/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/Users/suyas/AndroidStudioProjects/Study/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/suyas/AndroidStudioProjects/Study/app/src/main/res/layout/fragment_account.xml" value="0.25" />
+        <entry key="..\:/Users/suyas/AndroidStudioProjects/Study/app/src/main/res/layout/fragment_login.xml" value="0.25" />
+        <entry key="..\:/Users/suyas/AndroidStudioProjects/Study/app/src/main/res/layout/fragment_meet.xml" value="0.25" />
+        <entry key="..\:/Users/suyas/AndroidStudioProjects/Study/app/src/main/res/layout/fragment_register.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/suyas/AndroidStudioProjects/Study/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.25" />
         <entry key="..\:/Users/ysoma/AndroidStudioProjects/Study/app/src/main/res/drawable-v24/edit_button.xml" value="0.290625" />
         <entry key="..\:/Users/ysoma/AndroidStudioProjects/Study/app/src/main/res/drawable-v24/ic_mobile_login_bro.xml" value="0.290625" />
         <entry key="..\:/Users/ysoma/AndroidStudioProjects/Study/app/src/main/res/drawable-v24/login_background.xml" value="0.290625" />
