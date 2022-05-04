@@ -1,7 +1,9 @@
 package com.example.study;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import android.widget.EditText;
 
 import androidx.fragment.app.Fragment;
 
+import org.jitsi.meet.sdk.BroadcastEvent;
 import org.jitsi.meet.sdk.JitsiMeet;
 import org.jitsi.meet.sdk.JitsiMeetActivity;
 import org.jitsi.meet.sdk.JitsiMeetConferenceOptions;
@@ -64,6 +67,23 @@ public class MeetFragment extends Fragment {
         }
     }
 
+
+//    @SuppressLint("LongLogTag")
+//    private void onBroadcastReceived(Intent intent) {
+//        if (intent != null) {
+//            BroadcastEvent event = new BroadcastEvent(intent);
+//
+//            switch (event.getType()) {
+//                case CONFERENCE_JOINED:
+//                    Log.d("Conference Joined with url%s", (String) event.getData().get("url"));
+//
+//                    break;
+//                case PARTICIPANT_JOINED:
+//                    Log.d("Participant joined%s", (String) event.getData().get("name"));
+//                    break;
+//            }
+//        }
+//    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -87,6 +107,7 @@ public class MeetFragment extends Fragment {
                     .build();
 
             JitsiMeetActivity.launch(requireContext(), options);
+
         });
 
         createBtn.setOnClickListener(v -> {
@@ -95,6 +116,7 @@ public class MeetFragment extends Fragment {
                     .build();
 
             JitsiMeetActivity.launch(requireContext(), options);
+
         });
 
         shareBtn.setOnClickListener(v -> {
@@ -105,7 +127,9 @@ public class MeetFragment extends Fragment {
             intent.putExtra(Intent.EXTRA_TEXT, shareBody);
             startActivity(intent);
         });
+
         // Inflate the layout for this fragment
         return view;
     }
+
 }
