@@ -6,7 +6,6 @@ android {
     defaultConfig {
         applicationId "com.example.study"
         minSdk 26
-        targetSdk 32
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -36,4 +35,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 //    jitsi meet
     implementation ('org.jitsi.react:jitsi-meet-sdk:4.1.0') { transitive = true }
+//    Dynamic Screen Size
+    implementation 'com.intuit.sdp:sdp-android:1.1.0'
+
 }

@@ -1,6 +1,5 @@
 package com.example.study;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,17 +20,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MeetFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class MeetFragment extends Fragment {
     EditText secretCodeBox;
     Button joinBtn, shareBtn, createBtn;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -39,15 +31,6 @@ public class MeetFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MeetFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static MeetFragment newInstance(String param1, String param2) {
         MeetFragment fragment = new MeetFragment();
         Bundle args = new Bundle();
@@ -61,7 +44,6 @@ public class MeetFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            // TODO: Rename and change types of parameters
             getArguments().getString(ARG_PARAM1);
             getArguments().getString(ARG_PARAM2);
         }
@@ -96,7 +78,9 @@ public class MeetFragment extends Fragment {
         URL serverURL;
         try {
             serverURL = new URL("https://meet.jit.si");
-            JitsiMeetConferenceOptions defaultOptions = new JitsiMeetConferenceOptions.Builder().setServerURL(serverURL).build();
+            JitsiMeetConferenceOptions defaultOptions = new JitsiMeetConferenceOptions.Builder()
+                    .setServerURL(serverURL)
+                    .build();
             JitsiMeet.setDefaultConferenceOptions(defaultOptions);
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -104,6 +88,7 @@ public class MeetFragment extends Fragment {
         joinBtn.setOnClickListener(v -> {
             JitsiMeetConferenceOptions options = new JitsiMeetConferenceOptions.Builder()
                     .setRoom(secretCodeBox.getText().toString())
+                    .setConfigOverride("requireDisplayName", false)
                     .build();
 
             JitsiMeetActivity.launch(requireContext(), options);
@@ -133,3 +118,61 @@ public class MeetFragment extends Fragment {
     }
 
 }
+
+
+//
+//    @Override
+//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//                             Bundle savedInstanceState) {
+//        View view = inflater.inflate(R.layout.fragment_meet, container, false);
+//        secretCodeBox = view.findViewById(R.id.secretCodeBox);
+//        createBtn = view.findViewById(R.id.createBtn);
+//        joinBtn = view.findViewById(R.id.joinBtn);
+//        shareBtn = view.findViewById(R.id.shareBtn);
+//
+//        initializeJitsiMeet();
+//
+//        joinBtn.setOnClickListener(v -> joinMeeting(secretCodeBox.getText().toString()));
+//        createBtn.setOnClickListener(v -> createMeeting(secretCodeBox.getText().toString()));
+//        shareBtn.setOnClickListener(v -> shareMeetingCode());
+//
+//        return view;
+//    }
+//
+//    private void initializeJitsiMeet() {
+//        try {
+//            URL serverURL = new URL("https://meet.jit.si");
+//            JitsiMeetConferenceOptions defaultOptions = new JitsiMeetConferenceOptions.Builder()
+//                    .setServerURL(serverURL)
+//                    .build();
+//            JitsiMeet.setDefaultConferenceOptions(defaultOptions);
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    private void joinMeeting(String roomName) {
+//        JitsiMeetConferenceOptions options = new JitsiMeetConferenceOptions.Builder()
+//                .setRoom(roomName)
+//                .setConfigOverride("requireDisplayName", false)
+//                .build();
+//
+//        JitsiMeetActivity.launch(requireContext(), options);
+//    }
+//
+//    private void createMeeting(String roomName) {
+//        JitsiMeetConferenceOptions options = new JitsiMeetConferenceOptions.Builder()
+//                .setRoom(roomName)
+//                .build();
+//
+//        JitsiMeetActivity.launch(requireContext(), options);
+//    }
+//
+//    private void shareMeetingCode() {
+//        Intent intent = new Intent(Intent.ACTION_SEND);
+//        String shareBody = "Required Meeting Code: " + secretCodeBox.getText().toString();
+//        intent.setType("text/plain");
+//        intent.putExtra(Intent.EXTRA_TEXT, shareBody);
+//        startActivity(intent);
+//    }
+//}
