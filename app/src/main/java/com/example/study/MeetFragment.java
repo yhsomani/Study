@@ -1,6 +1,13 @@
 package com.example.study;
 
+import static androidx.core.content.ContextCompat.getSystemService;
+
+import static org.webrtc.ContextUtils.getApplicationContext;
+
+import android.content.Context;
 import android.content.Intent;
+import android.content.RestrictionEntry;
+import android.content.RestrictionsManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +25,7 @@ import org.jitsi.meet.sdk.JitsiMeetConferenceOptions;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Collection;
 
 
 public class MeetFragment extends Fragment {
@@ -66,6 +74,7 @@ public class MeetFragment extends Fragment {
 //            }
 //        }
 //    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -80,6 +89,10 @@ public class MeetFragment extends Fragment {
             serverURL = new URL("https://meet.jit.si");
             JitsiMeetConferenceOptions defaultOptions = new JitsiMeetConferenceOptions.Builder()
                     .setServerURL(serverURL)
+                    .setFeatureFlag("welcomepage.enabled", false)
+                    .setFeatureFlag("prejoinpage.enabled", false)
+                    .setFeatureFlag("lobby-mode.enabled", false)
+                    .setFeatureFlag("ask-to-join.enabled", false)
                     .build();
             JitsiMeet.setDefaultConferenceOptions(defaultOptions);
         } catch (MalformedURLException e) {
@@ -89,10 +102,14 @@ public class MeetFragment extends Fragment {
             JitsiMeetConferenceOptions options = new JitsiMeetConferenceOptions.Builder()
                     .setRoom(secretCodeBox.getText().toString())
                     .setConfigOverride("requireDisplayName", false)
+                    .setFeatureFlag("welcomepage.enabled", false)
+                    .setFeatureFlag("prejoinpage.enabled", false)
+                    .setFeatureFlag("lobby-mode.enabled", false)
+                    .setFeatureFlag("ask-to-join.enabled", false)
                     .build();
 
             JitsiMeetActivity.launch(requireContext(), options);
-
+            System.out.println("#################Feature flags" + options.getFeatureFlags());
         });
 
         createBtn.setOnClickListener(v -> {
@@ -176,3 +193,5 @@ public class MeetFragment extends Fragment {
 //        startActivity(intent);
 //    }
 //}
+
+
