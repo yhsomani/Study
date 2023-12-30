@@ -3,8 +3,10 @@ package com.example.study;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
@@ -13,6 +15,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCanceledListener;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +34,9 @@ public class LoginFragment extends Fragment {
     ImageButton visibility;
     Boolean icon = true;
     EditText et_email, et_password;
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
+    FirebaseAuth auth;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -79,6 +91,9 @@ public class LoginFragment extends Fragment {
         visibility = view.findViewById(R.id.imageButton);
         et_password = view.findViewById(R.id.login_password);
 
+
+        auth = FirebaseAuth.getInstance();
+
         visibility.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,9 +114,41 @@ public class LoginFragment extends Fragment {
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(), MainActivity.class));
+                String email = et_email.getText().toString().trim();
+                String password = et_password.getText().toString().trim();
+
+                if (TextUtils.isEmpty(email)) {
+                    et_email.setError("Email is required");
+                    return;
+                } else if (!email.matches(emailPattern)) {
+                    et_email.setError("Invalid Email");
+                    return;
+                } else if(TextUtils.isEmpty(password)) {
+                    et_password.setError("Password is required");
+                    return;
+                }
+                else {
+                    auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                try {
+                                    startActivity(new Intent(getContext(), MainActivity.class));
+                                    // Finish the current activity to prevent the user from coming back to the login screen
+                                    getActivity().finish();
+                                } catch (Exception e) {
+                                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Toast.makeText(getContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
             }
         });
+
 
         return view;
     }

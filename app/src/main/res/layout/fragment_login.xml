@@ -127,6 +127,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:background="@drawable/edit_button"
+            android:clickable="true"
             android:text="Login"
             android:textColor="#FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
