@@ -9,7 +9,7 @@ buildscript {
         maven {
             url "https://github.com/jitsi/jitsi-maven-repository/raw/master/releases"
         }
-        jcenter()
+//        jcenter()
 
     }
     dependencies {
@@ -21,6 +21,10 @@ buildscript {
     }
 }
 
-task clean(type: Delete) {
+tasks.register('clean', Delete) {
     delete rootProject.buildDir
 }
+// alternative below =>
+//task clean(type: Delete) {
+//    delete rootProject.buildDir
+//}
