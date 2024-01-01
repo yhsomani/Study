@@ -1,10 +1,9 @@
 package com.example.study;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
@@ -13,25 +12,45 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link RegisterFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class RegisterFragment extends Fragment {
 
-    Button register_btn;
-    ImageButton visibility;
-    Boolean icon = true;
-    EditText et_name, et_email, et_password;
+    private Button registerButton;
+    private ImageButton visibilityButton;
+    private EditText nameEditText, emailEditText, passwordEditText;
+    private CircleImageView profileImageView;
+    private ImageView selectProfileImageView;
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    private Uri imageURI;
+    FirebaseDatabase database;
+    FirebaseStorage storage;
+    String imageUri;
+    private boolean isPasswordVisible = true;
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -39,15 +58,6 @@ public class RegisterFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment RegisterFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static RegisterFragment newInstance(String param1, String param2) {
         RegisterFragment fragment = new RegisterFragment();
         Bundle args = new Bundle();
@@ -69,45 +79,173 @@ public class RegisterFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_register, container, false);
 
+        storage = FirebaseStorage.getInstance();
+        database = FirebaseDatabase.getInstance();
+        registerButton = view.findViewById(R.id.register_btn);
+        visibilityButton = view.findViewById(R.id.visible_btn);
+        nameEditText = view.findViewById(R.id.register_name);
+        emailEditText = view.findViewById(R.id.register_email);
+        passwordEditText = view.findViewById(R.id.register_password);
+        profileImageView = view.findViewById(R.id.profile_image);
+        selectProfileImageView = view.findViewById(R.id.imageView6);
 
 
-
-        register_btn = view.findViewById(R.id.register_btn);
-        visibility = view.findViewById(R.id.visible_btn);
-        et_name = view.findViewById(R.id.register_name);
-        et_email = view.findViewById(R.id.register_email);
-        et_password = view.findViewById(R.id.register_password);
-
-
-
-        visibility.setOnClickListener(new View.OnClickListener() {
+        visibilityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (icon) {
-                    et_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                    visibility.setImageResource(R.drawable.ic_invisibility);
-                    et_password.setHint("Password");
-                    icon = false;
-                } else {
-                    et_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                    visibility.setImageResource(R.drawable.ic_visibility);
-                    et_password.setHint("********");
-                    icon = true;
+                togglePasswordVisibility();
+            }
+        });
+
+        profileImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openImagePicker();
+            }
+        });
+
+        selectProfileImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openImagePicker();
+            }
+        });
+
+
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = nameEditText.getText().toString().trim();
+                String email = emailEditText.getText().toString().trim();
+                String password = passwordEditText.getText().toString().trim();
+                String status = "Hey I'm Using This Application";
+
+                if (TextUtils.isEmpty(name)) {
+                    nameEditText.setError("Username is required");
+                    return;
                 }
+                else if (TextUtils.isEmpty(email)) {
+                    emailEditText.setError("Email is required");
+                    return;
+                } else if (!email.matches(emailPattern)) {
+                    emailEditText.setError("Invalid Email");
+                    return;
+                } else if(TextUtils.isEmpty(password)) {
+                    passwordEditText.setError("Password is required");
+                    return;
+                } else if (password.length()<6) {
+                    passwordEditText.setError("Weak Password");
+                }
+                else {
+                    auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()){
+                                String id = task.getResult().getUser().getUid();
+                                DatabaseReference reference = database.getReference().child("user").child(id);
+
+                                String uid = task.getResult().getUser().getUid();
+                                if (imageURI!=null){
+                                    StorageReference storageReference = storage.getReference().child("upload").child(id);
+                                    storageReference.putFile(imageURI).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                                            if (task.isSuccessful()){
+                                                storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                    @Override
+                                                    public void onSuccess(Uri uri) {
+                                                        imageUri = uri.toString();
+                                                        Users users = new Users(id, name, email, password, imageUri, status);
+                                                        reference.setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                            @Override
+                                                            public void onComplete(@NonNull Task<Void> task) {
+                                                                if (task.isSuccessful()){
+                                                                    startActivity(new Intent(getActivity(), MainActivity.class));
+                                                                    getActivity().finish();
+                                                                }
+                                                                else {
+                                                                    Toast.makeText(getContext(), "", Toast.LENGTH_SHORT).show();
+                                                                }
+                                                            }
+                                                        });
+                                                    }
+                                                });
+                                            }
+                                        }
+                                    });
+                                }
+                                else {
+                                    String status = "Hey I'm Using This Application";
+                                    imageUri = "https://firebasestorage.googleapis.com/v0/b/study-acbc9.appspot.com/o/man-user-color-icon.svg?alt=media&token=8e965023-147f-4b7b-8766-d5d8ae8bd902";
+                                    Users users = new Users(id, name, email, password, imageUri, status);
+                                    reference.setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()){
+                                                startActivity(new Intent(getActivity(), MainActivity.class));
+                                                getActivity().finish();
+                                            }
+                                            else {
+                                                Toast.makeText(getContext(), "", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+                            else {
+                                Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+
+//                    startActivity(new Intent(getActivity(), MainActivity.class));
+                }
+
             }
         });
 
-        register_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Toast.makeText(getContext(), "Hi", Toast.LENGTH_SHORT).show();
-//                createUser();
-                startActivity(new Intent(getContext(), MainActivity.class));
-            }
-        });
         return view;
     }
+
+    private void togglePasswordVisibility() {
+        if (isPasswordVisible) {
+            passwordEditText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            visibilityButton.setImageResource(R.drawable.ic_invisibility);
+            passwordEditText.setHint("Password");
+        } else {
+            passwordEditText.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            visibilityButton.setImageResource(R.drawable.ic_visibility);
+            passwordEditText.setHint("********");
+        }
+        isPasswordVisible = !isPasswordVisible;
+    }
+
+    private void openImagePicker() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 10);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 10) {
+            if(data != null) {
+                imageURI = data.getData();
+                profileImageView.setImageURI(imageURI);
+            }
+        }
+    }
+    // Uncomment the block below when you implement createUser method
+    /*
+    private void createUser() {
+        // Implement your user creation logic here
+        // For example, get the user input from nameEditText, emailEditText, passwordEditText, and profileImageView
+        // Create a new user in your authentication system or save the user data to a database
+    }
+    */
 }

@@ -5,18 +5,14 @@ import android.content.Context;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-
-public class MyAdapter extends FragmentPagerAdapter {
-
+public class ManageTabAdapter extends FragmentPagerAdapter {
     private Context myContext;
     int totalTabs;
-
-    public MyAdapter(Context context, FragmentManager fm, int totalTabs) {
+    public ManageTabAdapter(Context context, FragmentManager fm, int totalTabs) {
         super(fm);
         myContext = context;
         this.totalTabs = totalTabs;
     }
-
     // this is for fragment tabs
     @Override
     public Fragment getItem(int position) {

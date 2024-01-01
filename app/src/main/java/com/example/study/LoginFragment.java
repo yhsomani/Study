@@ -126,14 +126,15 @@ public class LoginFragment extends Fragment {
                 } else if(TextUtils.isEmpty(password)) {
                     et_password.setError("Password is required");
                     return;
-                }
-                else {
+                } else if (password.length()<=6) {
+                    et_password.setError("Weak Password");
+                } else {
                     auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 try {
-                                    startActivity(new Intent(getContext(), MainActivity.class));
+                                    startActivity(new Intent(getActivity(), MainActivity.class));
                                     // Finish the current activity to prevent the user from coming back to the login screen
                                     getActivity().finish();
                                 } catch (Exception e) {
@@ -148,7 +149,6 @@ public class LoginFragment extends Fragment {
                 }
             }
         });
-
 
         return view;
     }

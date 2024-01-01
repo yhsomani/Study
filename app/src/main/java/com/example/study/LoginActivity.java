@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        final MyAdapter adapter = new MyAdapter(this, getSupportFragmentManager(), tabLayout.getTabCount());
+        final ManageTabAdapter adapter = new ManageTabAdapter(this, getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -48,5 +48,6 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
     }
 }
