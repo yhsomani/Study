@@ -43,7 +43,7 @@ public class splash extends AppCompatActivity {
         // Set animations on views
         logo.setAnimation(topAnim);
         name.setAnimation(topAnim);
-        slogan.setAnimation(bottomAnim);
+        slogan.setAnimation(topAnim);
         own1.setAnimation(bottomAnim);
         own2.setAnimation(bottomAnim);
 

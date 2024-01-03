@@ -1,58 +1,48 @@
 package com.example.study;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link AccountFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class AccountFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private Button updateProfileBtn;
+    private TextView textViewName, textViewStudentId, textViewEmail;
+    private CircleImageView profileImg;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private FirebaseAuth auth;
+    private DatabaseReference userReference;
+    private FirebaseUser currentUser;
+    private ProgressDialog progressDialog;
 
     public AccountFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AccountFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static AccountFragment newInstance(String param1, String param2) {
-        AccountFragment fragment = new AccountFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -60,5 +50,99 @@ public class AccountFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_account, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Initialize views
+        updateProfileBtn = view.findViewById(R.id.updateProfileBtn);
+        textViewName = view.findViewById(R.id.textView11);
+        textViewStudentId = view.findViewById(R.id.textView13);
+        textViewEmail = view.findViewById(R.id.textView15);
+        profileImg = view.findViewById(R.id.profileImg);
+
+        // Initialize Firebase components
+        auth = FirebaseAuth.getInstance();
+        currentUser = auth.getCurrentUser();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        if (currentUser != null) {
+            userReference = database.getReference("user").child(currentUser.getUid());
+        }
+
+        // Set click listener for the update profile button
+        updateProfileBtn.setOnClickListener(v -> updateProfile());
+
+        // Load user data
+        loadUserData();
+    }
+
+    private void loadUserData() {
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Loading User Data...");
+        progressDialog.show();
+
+        if (currentUser != null) {
+            userReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        Users user = snapshot.getValue(Users.class);
+                        if (user != null) {
+                            // Load data into views
+                            textViewName.setText("Name: " + user.getUserName());
+                            textViewStudentId.setText("Student ID: " + user.getUserId());
+                            textViewEmail.setText("Email: " + user.getMail());
+
+                            // Load profile image using Glide
+                            if (getContext() != null) {
+                                String profileImageUrl = user.getProfilepic();
+                                Toast.makeText(getContext(), "Profile Image URL: " + profileImageUrl, Toast.LENGTH_LONG).show();
+
+                                if (profileImg != null) {
+                                    Toast.makeText(getContext(), "Profile Image View: " + profileImg.toString(), Toast.LENGTH_LONG).show();
+
+                                    if ((profileImageUrl == null || profileImageUrl.isEmpty())) {
+                                        // Use default profile image if user's profile image is not available
+                                        profileImg.setImageResource(R.drawable.user_profile);
+                                        Toast.makeText(getContext(), "Default image set", Toast.LENGTH_LONG).show();
+                                    } else {
+                                        Glide.with(getContext())
+                                                .load(profileImageUrl)
+                                                .into(profileImg);
+                                        Toast.makeText(getContext(), "Non-default image set", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            }
+
+                            progressDialog.dismiss(); // Dismiss the progress dialog
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    progressDialog.dismiss(); // Dismiss the progress dialog
+                    Toast.makeText(getContext(), "Error loading user data", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
+
+    private void updateProfile() {
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Updating Profile...");
+        progressDialog.show();
+
+        // Get values from EditText fields
+        // String newName = editName.getText().toString().trim();
+        // String newStudentId = editStudentId.getText().toString().trim();
+
+        // Your existing updateProfile() logic here...
+
+        // Dismiss the progress dialog after the update is complete
+        progressDialog.dismiss();
+        Toast.makeText(getContext(), "Profile updated successfully", Toast.LENGTH_SHORT).show();
     }
 }

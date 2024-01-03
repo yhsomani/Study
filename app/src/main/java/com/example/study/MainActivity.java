@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (firebaseAuth.getCurrentUser() == null) {
             startActivity(new Intent(this, LoginActivity.class));
+            finish(); // Finish the MainActivity if the user is not authenticated
         }
     }
 
@@ -56,13 +57,13 @@ public class MainActivity extends AppCompatActivity {
                             fragment = MeetFragment.newInstance("", "");
                             break;
                         case R.id.QR_Code:
-//                            fragment = QRCodeFragment.newInstance("", "");
+                            // TODO: Add QR code fragment
                             break;
                         case R.id.Notice:
                             fragment = NoticeFragment.newInstance("", "");
                             break;
                         case R.id.Account:
-                            fragment = AccountFragment.newInstance("", "");
+                            fragment = new AccountFragment(); // Updated instantiation
                             break;
                         default:
                             fragment = MeetFragment.newInstance("", "");
@@ -72,5 +73,4 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
             };
-
 }
