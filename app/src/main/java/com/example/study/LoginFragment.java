@@ -134,6 +134,7 @@ public class LoginFragment extends Fragment {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 try {
+
                                     startActivity(new Intent(getActivity(), MainActivity.class));
                                     // Finish the current activity to prevent the user from coming back to the login screen
                                     getActivity().finish();

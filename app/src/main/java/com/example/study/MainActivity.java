@@ -1,12 +1,10 @@
 package com.example.study;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -16,54 +14,63 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
-    BottomNavigationView bottomNavigation;
-    FirebaseAuth auth;
-    @SuppressLint("UseCompatLoadingForDrawables")
+    private BottomNavigationView bottomNavigation;
+    private FirebaseAuth firebaseAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        auth = FirebaseAuth.getInstance();
-        if (auth.getCurrentUser() == null){
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);
-        }
-        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setDisplayShowCustomEnabled(true);
-        getSupportActionBar().setCustomView(R.layout.action_bar);
-        getSupportActionBar().setTitle("Study");
-        getSupportActionBar().setBackgroundDrawable(getDrawable(R.drawable.background_border));
+
+        firebaseAuth = FirebaseAuth.getInstance();
+
         bottomNavigation = findViewById(R.id.bottom_navigation);
-        bottomNavigation.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
+        bottomNavigation.setOnNavigationItemSelectedListener(navListener);
+
         openFragment(MeetFragment.newInstance("", ""));
     }
-    public void openFragment(Fragment fragment) {
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (firebaseAuth.getCurrentUser() == null) {
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+    }
+
+    private void openFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.container, fragment);
-        transaction.addToBackStack(null);
         transaction.commit();
     }
 
-    BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
-        @Override public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.Meet:
-                    openFragment(MeetFragment.newInstance("", ""));
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    Fragment fragment = null;
+                    switch (item.getItemId()) {
+                        case R.id.Meet:
+                            fragment = MeetFragment.newInstance("", "");
+                            break;
+                        case R.id.QR_Code:
+//                            fragment = QRCodeFragment.newInstance("", "");
+                            break;
+                        case R.id.Notice:
+                            fragment = NoticeFragment.newInstance("", "");
+                            break;
+                        case R.id.Account:
+                            fragment = AccountFragment.newInstance("", "");
+                            break;
+                        default:
+                            fragment = MeetFragment.newInstance("", "");
+                            break;
+                    }
+                    openFragment(fragment);
                     return true;
-                case R.id.QR_Code:
-//                    openFragment(QR_CodeFragment.newInstance("", ""));
-                    return true;
-//                case R.id.Examination:
-//                    openFragment(ExaminationFragment.newInstance("", ""));
-//                    return true;
-                case R.id.Notice:
-//                    openFragment(NoticeFragment.newInstance("", ""));
-                    return true;
-                case R.id.Account:
-                    openFragment(AccountFragment.newInstance("", ""));
-                    return true;
-            }
-            return false;
-        }
-    };
+                }
+            };
+
 }

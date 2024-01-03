@@ -1,5 +1,6 @@
 package com.example.study;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) {
 
             }
-        });
 
+        });
     }
 }
