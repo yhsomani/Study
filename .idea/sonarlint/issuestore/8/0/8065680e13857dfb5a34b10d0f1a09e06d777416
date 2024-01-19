@@ -1,11 +1,9 @@
 
-s
-java:S1450""VRemove the "mParam1" field and declare it as a local variable in the relevant methods.(•Íï‘8 ÏïŒÒ1
-s
-java:S1450#"VRemove the "mParam2" field and declare it as a local variable in the relevant methods.(¡ˆ€ 8¢ÏïŒÒ1
-
-java:S1186N"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ô°¤¦8¾ÏïŒÒ1
+y
+java:S1450"WRemove the "database" field and declare it as a local variable in the relevant methods.(­“óûÿÿÿÿ8±ôŸ‚Ô1
+
+java:S1450"_Remove the "mainUserRecycler" field and declare it as a local variable in the relevant methods.(°Íİáÿÿÿÿÿ8²ôŸ‚Ô1
 H
-java:S1068""+Remove this unused "mParam1" private field.(•Íï‘8ÍÏïŒÒ1
+java:S1068!"+Remove this unused "mParam1" private field.(•Íï‘8ıôŸ‚Ô1
 H
-java:S1068#"+Remove this unused "mParam2" private field.(¡ˆ€ 8ÏÏïŒÒ1
+java:S1068""+Remove this unused "mParam2" private field.(¡ˆ€ 8şôŸ‚Ô1

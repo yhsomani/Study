@@ -1,15 +1,9 @@
 
-l
-java:S1450"VRemove the "mParam1" field and declare it as a local variable in the relevant methods.(•Íï‘
-l
-java:S1450"VRemove the "mParam2" field and declare it as a local variable in the relevant methods.(¡ˆ€ 
-M
-java:S1135"2Complete the task associated to this TODO comment.(ÜûŠ—øÿÿÿÿ
-M
-java:S1135"2Complete the task associated to this TODO comment.(ğï¢öúÿÿÿÿ
-M
-java:S1135'"2Complete the task associated to this TODO comment.(ßíŠÿÿÿÿÿ
-A
-java:S1068"+Remove this unused "mParam1" private field.(•Íï‘
-A
-java:S1068"+Remove this unused "mParam2" private field.(¡ˆ€ 
+s
+java:S1450"VRemove the "mParam1" field and declare it as a local variable in the relevant methods.(•Íï‘8ÒÚÀ‚Ô1
+s
+java:S1450"VRemove the "mParam2" field and declare it as a local variable in the relevant methods.(¡ˆ€ 8ÓÚÀ‚Ô1
+H
+java:S1068"+Remove this unused "mParam1" private field.(•Íï‘8æÚÀ‚Ô1
+H
+java:S1068"+Remove this unused "mParam2" private field.(¡ˆ€ 8æÚÀ‚Ô1

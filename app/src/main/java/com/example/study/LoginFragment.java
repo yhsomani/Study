@@ -1,3 +1,4 @@
+// LoginFragment.java
 package com.example.study;
 
 import android.app.ProgressDialog;
@@ -23,12 +24,16 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginFragment extends Fragment {
 
-    Button login_btn;
-    ImageButton visibility;
-    Boolean icon = true;
-    EditText et_email, et_password;
-    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    // UI components
+    Button loginBtn;
+    ImageButton visibilityBtn;
+    Boolean isPasswordVisible = true;
+    EditText emailEditText, passwordEditText;
+
+    // Firebase Authentication
     FirebaseAuth auth;
+
+    // Progress dialog for login process
     ProgressDialog progressDialog;
 
     @Override
@@ -36,24 +41,24 @@ public class LoginFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
+        // Initialize UI components and Firebase Authentication
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setCancelable(false);
-
-        login_btn = view.findViewById(R.id.login_btn);
-        et_email = view.findViewById(R.id.login_email);
-        visibility = view.findViewById(R.id.imageButton);
-        et_password = view.findViewById(R.id.login_password);
-
+        loginBtn = view.findViewById(R.id.login_btn);
+        emailEditText = view.findViewById(R.id.login_email);
+        visibilityBtn = view.findViewById(R.id.imageButton);
+        passwordEditText = view.findViewById(R.id.login_password);
         auth = FirebaseAuth.getInstance();
 
-        visibility.setOnClickListener(new View.OnClickListener() {
+        // Set click listeners
+        visibilityBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 togglePasswordVisibility();
             }
         });
 
-        login_btn.setOnClickListener(new View.OnClickListener() {
+        loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 loginUser();
@@ -63,28 +68,30 @@ public class LoginFragment extends Fragment {
         return view;
     }
 
+    // Toggle password visibility
     private void togglePasswordVisibility() {
-        if (icon) {
-            et_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-            visibility.setImageResource(R.drawable.ic_invisibility);
-            et_password.setHint("Password");
-            icon = false;
+        if (isPasswordVisible) {
+            passwordEditText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            visibilityBtn.setImageResource(R.drawable.ic_invisibility);
+            passwordEditText.setHint("Password");
         } else {
-            et_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
-            visibility.setImageResource(R.drawable.ic_visibility);
-            et_password.setHint("********");
-            icon = true;
+            passwordEditText.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            visibilityBtn.setImageResource(R.drawable.ic_visibility);
+            passwordEditText.setHint("********");
         }
+        isPasswordVisible = !isPasswordVisible;
     }
 
+    // Attempt to log in the user
     private void loginUser() {
-        String email = et_email.getText().toString().trim();
-        String password = et_password.getText().toString().trim();
+        String email = emailEditText.getText().toString().trim();
+        String password = passwordEditText.getText().toString().trim();
 
+        // Validate email and password
         if (TextUtils.isEmpty(email)) {
             showError("Email is required");
             return;
-        } else if (!email.matches(emailPattern)) {
+        } else if (!email.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")) {
             showError("Invalid Email");
             return;
         } else if (TextUtils.isEmpty(password)) {
@@ -97,6 +104,7 @@ public class LoginFragment extends Fragment {
 
         showProgressDialog("Logging in...");
 
+        // Sign in with Firebase Authentication
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -104,6 +112,7 @@ public class LoginFragment extends Fragment {
 
                 if (task.isSuccessful()) {
                     try {
+                        // If login is successful, start the main activity
                         startActivity(new Intent(getActivity(), MainActivity.class));
                         // Finish the current activity to prevent the user from coming back to the login screen
                         getActivity().finish();
@@ -111,21 +120,25 @@ public class LoginFragment extends Fragment {
                         showError(e.getMessage());
                     }
                 } else {
+                    // If login fails, show error message
                     showError(task.getException().getMessage());
                 }
             }
         });
     }
 
+    // Show progress dialog with a given message
     private void showProgressDialog(String message) {
         progressDialog.setMessage(message);
         progressDialog.show();
     }
 
+    // Hide the progress dialog
     private void hideProgressDialog() {
         progressDialog.dismiss();
     }
 
+    // Show an error message using Toast
     private void showError(String message) {
         hideProgressDialog();
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();

@@ -1,9 +1,10 @@
 
-[
-java:S2637"EThis method's return value is marked "@NonNull" but null is returned.(¥¹ï
-W
-java:S1874"<Remove this use of "FragmentPagerAdapter"; it is deprecated.(ÀŒãèûÿÿÿÿ
-C
-java:S1874".Remove this use of "<init>"; it is deprecated.(‘í›\
-C
-java:S1068	"-Remove this unused "myContext" private field.(’÷†å
+b
+java:S2637""EThis method's return value is marked "@NonNull" but null is returned.(¥¹ï8ö¥ˆ–Ò1
+^
+java:S1874
+"<Remove this use of "FragmentPagerAdapter"; it is deprecated.(ÀŒãèûÿÿÿÿ8û¥ˆ–Ò1
+J
+java:S1874".Remove this use of "<init>"; it is deprecated.(‘í›\8„¦ˆ–Ò1
+J
+java:S1068"-Remove this unused "myContext" private field.(’÷†å8™¦ˆ–Ò1

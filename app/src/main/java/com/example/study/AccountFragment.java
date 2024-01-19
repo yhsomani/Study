@@ -27,49 +27,34 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AccountFragment extends Fragment {
 
+    // UI components
     private Button updateProfileBtn;
     private TextView textViewName, textViewStudentId, textViewEmail;
     private CircleImageView profileImg;
 
+    // Firebase
     private FirebaseAuth auth;
     private DatabaseReference userReference;
     private FirebaseUser currentUser;
+
+    // Progress dialog to show loading or updating status
     private ProgressDialog progressDialog;
 
+    // Default constructor
     public AccountFragment() {
         // Required empty public constructor
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+    // onCreate method...
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_account, container, false);
-    }
+    // onCreateView method...
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Initialize views
-        updateProfileBtn = view.findViewById(R.id.updateProfileBtn);
-        textViewName = view.findViewById(R.id.textView11);
-        textViewStudentId = view.findViewById(R.id.textView13);
-        textViewEmail = view.findViewById(R.id.textView15);
-        profileImg = view.findViewById(R.id.profileImg);
-
-        // Initialize Firebase components
-        auth = FirebaseAuth.getInstance();
-        currentUser = auth.getCurrentUser();
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        if (currentUser != null) {
-            userReference = database.getReference("user").child(currentUser.getUid());
-        }
+        // Initialize views and Firebase components
+        initializeViews(view);
 
         // Set click listener for the update profile button
         updateProfileBtn.setOnClickListener(v -> updateProfile());
@@ -78,6 +63,23 @@ public class AccountFragment extends Fragment {
         loadUserData();
     }
 
+    // Initialize views and Firebase components
+    private void initializeViews(View view) {
+        updateProfileBtn = view.findViewById(R.id.updateProfileBtn);
+        textViewName = view.findViewById(R.id.textView11);
+        textViewStudentId = view.findViewById(R.id.textView13);
+        textViewEmail = view.findViewById(R.id.textView15);
+        profileImg = view.findViewById(R.id.profileImg);
+
+        auth = FirebaseAuth.getInstance();
+        currentUser = auth.getCurrentUser();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        if (currentUser != null) {
+            userReference = database.getReference("user").child(currentUser.getUid());
+        }
+    }
+
+    // Load user data from Firebase
     private void loadUserData() {
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("Loading User Data...");
@@ -96,25 +98,7 @@ public class AccountFragment extends Fragment {
                             textViewEmail.setText("Email: " + user.getMail());
 
                             // Load profile image using Glide
-                            if (getContext() != null) {
-                                String profileImageUrl = user.getProfilepic();
-                                Toast.makeText(getContext(), "Profile Image URL: " + profileImageUrl, Toast.LENGTH_LONG).show();
-
-                                if (profileImg != null) {
-                                    Toast.makeText(getContext(), "Profile Image View: " + profileImg.toString(), Toast.LENGTH_LONG).show();
-
-                                    if ((profileImageUrl == null || profileImageUrl.isEmpty())) {
-                                        // Use default profile image if user's profile image is not available
-                                        profileImg.setImageResource(R.drawable.user_profile);
-                                        Toast.makeText(getContext(), "Default image set", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Glide.with(getContext())
-                                                .load(profileImageUrl)
-                                                .into(profileImg);
-                                        Toast.makeText(getContext(), "Non-default image set", Toast.LENGTH_LONG).show();
-                                    }
-                                }
-                            }
+                            loadProfileImage(user.getProfilepic());
 
                             progressDialog.dismiss(); // Dismiss the progress dialog
                         }
@@ -130,6 +114,24 @@ public class AccountFragment extends Fragment {
         }
     }
 
+    // Load profile image using Glide
+    private void loadProfileImage(String profileImageUrl) {
+        if (getContext() != null) {
+            if (profileImg != null) {
+                if (profileImageUrl == null || profileImageUrl.isEmpty()) {
+                    // Use default profile image if user's profile image is not available
+                    profileImg.setImageResource(R.drawable.user_profile);
+                } else {
+                    // Load non-default image using Glide
+                    Glide.with(getContext())
+                            .load(profileImageUrl)
+                            .into(profileImg);
+                }
+            }
+        }
+    }
+
+    // Update profile logic (not fully implemented in this example)
     private void updateProfile() {
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("Updating Profile...");
