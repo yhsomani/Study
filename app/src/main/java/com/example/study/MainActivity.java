@@ -1,3 +1,4 @@
+// MainActivity.java
 package com.example.study;
 
 import android.content.Intent;
@@ -14,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
+    // UI components
     private BottomNavigationView bottomNavigation;
     private FirebaseAuth firebaseAuth;
 
@@ -22,11 +24,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Initialize Firebase Authentication
         firebaseAuth = FirebaseAuth.getInstance();
 
+        // Get BottomNavigationView reference and set the listener
         bottomNavigation = findViewById(R.id.bottom_navigation);
         bottomNavigation.setOnNavigationItemSelectedListener(navListener);
 
+        // Open the default fragment when the activity is created
         openFragment(MeetFragment.newInstance("", ""));
     }
 
@@ -34,18 +39,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        // Check if the user is not authenticated, redirect to LoginActivity and finish MainActivity
         if (firebaseAuth.getCurrentUser() == null) {
             startActivity(new Intent(this, LoginActivity.class));
-            finish(); // Finish the MainActivity if the user is not authenticated
+            finish();
         }
     }
 
+    // Open a fragment in the container
     private void openFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.container, fragment);
         transaction.commit();
     }
 
+    // Navigation item selection listener
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -74,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
                             fragment = MeetFragment.newInstance("", "");
                             break;
                     }
+                    // Open the selected fragment
                     openFragment(fragment);
                     return true;
                 }

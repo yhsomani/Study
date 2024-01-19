@@ -1,25 +1,25 @@
 
-j
-java:S1845,"TRename field "imageUri" to prevent any misunderstanding/clash with field "imageURI".(ÉìÒå
-e
-java:S1659#"JDeclare "emailEditText" and all following declarations on a separate line.(ÇÕæùÿÿÿÿ
-L
-java:S1874&"6Remove this use of "ProgressDialog"; it is deprecated.(ğİıº
-L
-java:S18744"6Remove this use of "ProgressDialog"; it is deprecated.(çöĞ×
-Y
-java:S1874Z">Remove this use of "startActivityForResult"; it is deprecated.(™äøÿÿÿÿ
+q
+java:S1845;"TRename field "imageUri" to prevent any misunderstanding/clash with field "imageURI".(ÉìÒå8ŠøÕ•Ò1
+l
+java:S1659+"JDeclare "emailEditText" and all following declarations on a separate line.(ÇÕæùÿÿÿÿ8‹øÕ•Ò1
+S
+java:S1874."6Remove this use of "ProgressDialog"; it is deprecated.(ğİıº8”øÕ•Ò1
+S
+java:S1874G"6Remove this use of "ProgressDialog"; it is deprecated.(çöĞ×8œøÕ•Ò1
+`
+java:S1874s">Remove this use of "startActivityForResult"; it is deprecated.(™äøÿÿÿÿ8ï½È•Ò1
+U
+java:S1874‚"2Remove this use of "setMessage"; it is deprecated.(Áò¢§ÿÿÿÿÿ8ò½È•Ò1
+n
+java:S1612"KReplace this lambda with method reference 'this::handleRegistrationResult'.(Âšı‘şÿÿÿÿ8÷½È•Ò1
+P
+java:S1874£"2Remove this use of "setMessage"; it is deprecated.(ÉÕ‹ı8ø½È•Ò1
+P
+java:S1874¨"2Remove this use of "setMessage"; it is deprecated.(…õ®÷8ù½È•Ò1
+n
+java:S1612®"KReplace this lambda with method reference 'this::handleRegistrationResult'.(æ©Øµşÿÿÿÿ8ú½È•Ò1
 m
-java:S3776]"RRefactor this method to reduce its Cognitive Complexity from 29 to the 15 allowed.(¾Ë«ûúÿÿÿÿ
-M
-java:S1874h"2Remove this use of "setMessage"; it is deprecated.(Áò¢§ÿÿÿÿÿ
-C
-java:S1481q"(Remove this unused "uid" local variable.(èí™øÿÿÿÿ
-H
-java:S1874u"2Remove this use of "setMessage"; it is deprecated.(ÉÕ‹ı
-H
-java:S1874z"2Remove this use of "setMessage"; it is deprecated.(…õ®÷
-f
-java:S1874¤"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(™­²©ùÿÿÿÿ
-T
-java:S1874¥"8Remove this use of "onActivityResult"; it is deprecated.(ß¬©úÿÿÿÿ
+java:S1874Â"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(™­²©ùÿÿÿÿ8€¾È•Ò1
+[
+java:S1874Ã"8Remove this use of "onActivityResult"; it is deprecated.(ß¬©úÿÿÿÿ8¾È•Ò1

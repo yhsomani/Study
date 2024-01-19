@@ -1,3 +1,8 @@
+/*
+ * NoticeFragment.java
+ * A simple Fragment for displaying notices.
+ */
+
 package com.example.study;
 
 import android.os.Bundle;
@@ -15,15 +20,15 @@ import android.view.ViewGroup;
  */
 public class NoticeFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    // Constants for fragment initialization parameters
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
+    // Parameters for fragment initialization
     private String mParam1;
     private String mParam2;
 
+    // Default constructor
     public NoticeFragment() {
         // Required empty public constructor
     }
@@ -36,7 +41,7 @@ public class NoticeFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment NoticeFragment.
      */
-    // TODO: Rename and change types and number of parameters
+    // Factory method for creating a new instance of the fragment
     public static NoticeFragment newInstance(String param1, String param2) {
         NoticeFragment fragment = new NoticeFragment();
         Bundle args = new Bundle();
@@ -49,6 +54,7 @@ public class NoticeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Retrieve arguments when the fragment is created
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);

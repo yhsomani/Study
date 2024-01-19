@@ -1,20 +1,20 @@
 
-=
-java:S16041"(Make this anonymous inner class a lambda(ÅşV
->
-java:S16048"(Make this anonymous inner class a lambda(×³Ç¬
-=
-java:S1604d"(Make this anonymous inner class a lambda(ÍÖX
->
-java:S5411C"(Use a primitive boolean expression here.(è ô¡
-i	java:S116"TRename this field "login_btn" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(½üÒÜ
-m	java:S116"SRename this field "et_email" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÖìæÎøÿÿÿÿ
-p	java:S116"VRename this field "et_password" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÖìæÎøÿÿÿÿ
 D
-java:S1659")Declare "et_password" on a separate line.(ÖìæÎøÿÿÿÿ
-L
-java:S1874 "6Remove this use of "ProgressDialog"; it is deprecated.(ğİıº
-L
-java:S1874'"6Remove this use of "ProgressDialog"; it is deprecated.(çöĞ×
-M
-java:S1874y"2Remove this use of "setMessage"; it is deprecated.(©çø¶ûÿÿÿÿ
+java:S16046"(Make this anonymous inner class a lambda(ÅşV8Úëó•Ò1
+E
+java:S1604="(Make this anonymous inner class a lambda(×³Ç¬8Úëó•Ò1
+D
+java:S1604m"(Make this anonymous inner class a lambda(ÍÖX8Ûëó•Ò1
+E
+java:S5411I"(Use a primitive boolean expression here.(è ô¡8Ûëó•Ò1
+p	java:S116"TRename this field "login_btn" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(½üÒÜ8Çíó•Ò1
+t	java:S116"SRename this field "et_email" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÖìæÎøÿÿÿÿ8Èíó•Ò1
+w	java:S116"VRename this field "et_password" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÖìæÎøÿÿÿÿ8Èíó•Ò1
+K
+java:S1659")Declare "et_password" on a separate line.(ÖìæÎøÿÿÿÿ8Ííó•Ò1
+S
+java:S1874%"6Remove this use of "ProgressDialog"; it is deprecated.(ğİıº8Òíó•Ò1
+S
+java:S1874-"6Remove this use of "ProgressDialog"; it is deprecated.(çöĞ×8Ùíó•Ò1
+U
+java:S1874…"2Remove this use of "setMessage"; it is deprecated.(©çø¶ûÿÿÿÿ8¹îó•Ò1

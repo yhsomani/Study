@@ -1,22 +1,24 @@
+/*
+ * SplashActivity.java
+ * Activity for displaying a splash screen with animations before launching the main activity.
+ */
+
 package com.example.study;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-// SplashActivity.java
+public class SplashActivity extends AppCompatActivity {
 
-public class splash extends AppCompatActivity {
-
-    private static final int SPLASH_TIME_OUT = 3000; // 3 seconds
+    // Duration of the splash screen in milliseconds (3 seconds)
+    private static final int SPLASH_TIME_OUT = 3000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +27,6 @@ public class splash extends AppCompatActivity {
 
         // Hide action bar
         getSupportActionBar().hide();
-        // Apply splash screen theme
-//        setTheme(R.style.splash);
 
         // Load animations
         Animation topAnim = AnimationUtils.loadAnimation(this, R.anim.top_animation);
@@ -46,12 +46,11 @@ public class splash extends AppCompatActivity {
         own1.setAnimation(bottomAnim);
         own2.setAnimation(bottomAnim);
 
-
         // Handle splash screen timeout
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(splash.this, MainActivity.class));
+                startActivity(new Intent(SplashActivity.this, MainActivity.class));
                 finish();
             }
         }, SPLASH_TIME_OUT);

@@ -1,0 +1,22 @@
+
+p
+java:S1659 "NDeclare "textViewStudentId" and all following declarations on a separate line.(é‚Áüÿÿÿÿ8˜‰á•Ò1
+u
+java:S1450$"SRemove the "auth" field and declare it as a local variable in the relevant methods.(Ú‡›æøÿÿÿÿ8™‰á•Ò1
+{
+java:S1450"_Remove the "updateProfileBtn" field and declare it as a local variable in the relevant methods.(›ìü8™‰á•Ò1
+Q
+java:S1874'"6Remove this use of "ProgressDialog"; it is deprecated.(·á…Çùÿÿÿÿ
+E
+java:S1185/"(Remove this method to simply inherit it.(ßìê¯8¬‰á•Ò1
+o
+java:S3776U"RRefactor this method to reduce its Cognitive Complexity from 28 to the 15 allowed.(š¨„Ğ8·‰á•Ò1
+X
+java:S1874V"6Remove this use of "ProgressDialog"; it is deprecated.(õ¹´ıüÿÿÿÿ8»‰á•Ò1
+M
+java:S1874W"2Remove this use of "setMessage"; it is deprecated.(é¹“ùÿÿÿÿ
+Y
+java:S1874‡"6Remove this use of "ProgressDialog"; it is deprecated.(õ¹´ıüÿÿÿÿ8Ê‰á•Ò1
+P
+java:S1874ˆ"2Remove this use of "setMessage"; it is deprecated.(¸Ñ„¸8Ë‰á•Ò1
+R	java:S125Œ"<This block of commented-out lines of code should be removed.(©Ëë¿

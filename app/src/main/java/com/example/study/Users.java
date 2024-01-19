@@ -1,12 +1,17 @@
-// Users.java
+/*
+ * Users.java
+ * Model class representing user information.
+ */
+
 package com.example.study;
 
 public class Users {
 
+    // Default constructor required for Firebase
     public Users() {
-        // No arg constructor for Firebase
     }
 
+    // Parameterized constructor for creating user instances
     public Users(String userId, String userName, String mail, String password, String profilepic, String status) {
         this.userId = userId;
         this.userName = userName;
@@ -16,8 +21,10 @@ public class Users {
         this.status = status;
     }
 
+    // Private fields representing user attributes
     private String profilepic, mail, userName, password, userId, lastMessage, status;
 
+    // Getter and setter methods for accessing and updating user attributes
     public String getProfilepic() {
         return profilepic;
     }

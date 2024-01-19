@@ -27,15 +27,18 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AccountFragment extends Fragment {
 
+    // UI components
     private Button updateProfileBtn;
     private TextView textViewName, textViewStudentId, textViewEmail;
     private CircleImageView profileImg;
 
+    // Firebase
     private FirebaseAuth auth;
     private DatabaseReference userReference;
     private FirebaseUser currentUser;
     private ProgressDialog progressDialog;
 
+    // Default constructor
     public AccountFragment() {
         // Required empty public constructor
     }
@@ -78,6 +81,7 @@ public class AccountFragment extends Fragment {
         loadUserData();
     }
 
+    // Load user data from Firebase
     private void loadUserData() {
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("Loading User Data...");
@@ -98,20 +102,16 @@ public class AccountFragment extends Fragment {
                             // Load profile image using Glide
                             if (getContext() != null) {
                                 String profileImageUrl = user.getProfilepic();
-                                Toast.makeText(getContext(), "Profile Image URL: " + profileImageUrl, Toast.LENGTH_LONG).show();
 
                                 if (profileImg != null) {
-                                    Toast.makeText(getContext(), "Profile Image View: " + profileImg.toString(), Toast.LENGTH_LONG).show();
-
                                     if ((profileImageUrl == null || profileImageUrl.isEmpty())) {
                                         // Use default profile image if user's profile image is not available
                                         profileImg.setImageResource(R.drawable.user_profile);
-                                        Toast.makeText(getContext(), "Default image set", Toast.LENGTH_LONG).show();
                                     } else {
+                                        // Load non-default image using Glide
                                         Glide.with(getContext())
                                                 .load(profileImageUrl)
                                                 .into(profileImg);
-                                        Toast.makeText(getContext(), "Non-default image set", Toast.LENGTH_LONG).show();
                                     }
                                 }
                             }
@@ -130,6 +130,7 @@ public class AccountFragment extends Fragment {
         }
     }
 
+    // Update profile logic (not fully implemented in this example)
     private void updateProfile() {
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("Updating Profile...");
