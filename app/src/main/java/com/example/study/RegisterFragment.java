@@ -16,19 +16,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.util.Objects;
 
@@ -64,7 +59,7 @@ public class RegisterFragment extends Fragment {
         nameEditText = view.findViewById(R.id.register_name);
         emailEditText = view.findViewById(R.id.register_email);
         passwordEditText = view.findViewById(R.id.register_password);
-        profileImageView = view.findViewById(R.id.profile_image);
+        profileImageView = view.findViewById(R.id.userProfile);
         ImageView selectProfileImageView = view.findViewById(R.id.imageView6);
 
         visibilityButton.setOnClickListener(v -> togglePasswordVisibility());

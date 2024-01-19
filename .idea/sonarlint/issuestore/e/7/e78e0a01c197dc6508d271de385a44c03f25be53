@@ -1,0 +1,25 @@
+
+j
+java:S1845,"TRename field "imageUri" to prevent any misunderstanding/clash with field "imageURI".(ÉìÒå
+e
+java:S1659#"JDeclare "emailEditText" and all following declarations on a separate line.(ÇÕæùÿÿÿÿ
+L
+java:S1874&"6Remove this use of "ProgressDialog"; it is deprecated.(ğİıº
+L
+java:S18744"6Remove this use of "ProgressDialog"; it is deprecated.(çöĞ×
+Y
+java:S1874Z">Remove this use of "startActivityForResult"; it is deprecated.(™äøÿÿÿÿ
+m
+java:S3776]"RRefactor this method to reduce its Cognitive Complexity from 29 to the 15 allowed.(¾Ë«ûúÿÿÿÿ
+M
+java:S1874h"2Remove this use of "setMessage"; it is deprecated.(Áò¢§ÿÿÿÿÿ
+C
+java:S1481q"(Remove this unused "uid" local variable.(èí™øÿÿÿÿ
+H
+java:S1874u"2Remove this use of "setMessage"; it is deprecated.(ÉÕ‹ı
+H
+java:S1874z"2Remove this use of "setMessage"; it is deprecated.(…õ®÷
+f
+java:S1874¤"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(™­²©ùÿÿÿÿ
+T
+java:S1874¥"8Remove this use of "onActivityResult"; it is deprecated.(ß¬©úÿÿÿÿ

@@ -25,7 +25,6 @@ public class splash extends AppCompatActivity {
 
         // Hide action bar
         getSupportActionBar().hide();
-
         // Apply splash screen theme
 //        setTheme(R.style.splash);
 

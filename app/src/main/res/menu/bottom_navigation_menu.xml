@@ -9,10 +9,10 @@
         android:id="@+id/QR_Code"
         android:icon="@drawable/qr_code_scanner"
         android:title="QR Scanner" />
-<!--    <item-->
-<!--        android:id="@+id/Examination"-->
-<!--        android:icon="@drawable/ic_baseline_assignment_24"-->
-<!--        android:title="Examination" />-->
+    <item
+        android:id="@+id/Chat"
+        android:icon="@drawable/chaticon"
+        android:title="Chat" />
     <item
         android:id="@+id/Notice"
         android:icon="@drawable/email_icon"

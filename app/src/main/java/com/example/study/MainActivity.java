@@ -53,19 +53,24 @@ public class MainActivity extends AppCompatActivity {
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     Fragment fragment = null;
                     switch (item.getItemId()) {
-                        case R.id.Meet:
-                            fragment = MeetFragment.newInstance("", "");
-                            break;
                         case R.id.QR_Code:
                             // TODO: Add QR code fragment
+                            getSupportActionBar().setTitle("QR-Code Scanner");
+                            break;
+                        case R.id.Chat:
+                            getSupportActionBar().setTitle("Chat");
+                            fragment = ChatFragment.newInstance("", "");
                             break;
                         case R.id.Notice:
+                            getSupportActionBar().setTitle("NoticeBoard");
                             fragment = NoticeFragment.newInstance("", "");
                             break;
                         case R.id.Account:
+                            getSupportActionBar().setTitle("Account");
                             fragment = new AccountFragment(); // Updated instantiation
                             break;
                         default:
+                            getSupportActionBar().setTitle("Meet");
                             fragment = MeetFragment.newInstance("", "");
                             break;
                     }
