@@ -1,3 +1,4 @@
+// Users.java
 package com.example.study;
 
 public class Users {
@@ -15,7 +16,7 @@ public class Users {
         this.status = status;
     }
 
-    private String profilepic,mail,userName,password,userId,lastMessage,status;
+    private String profilepic, mail, userName, password, userId, lastMessage, status;
 
     public String getProfilepic() {
         return profilepic;
@@ -72,5 +73,4 @@ public class Users {
     public void setStatus(String status) {
         this.status = status;
     }
-
 }

@@ -1,16 +1,15 @@
+// ChatFragment.java
 package com.example.study;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -60,7 +59,7 @@ public class ChatFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_chat,container,false);
+        View view = inflater.inflate(R.layout.fragment_chat, container, false);
 
         database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference().child("user");
@@ -68,7 +67,7 @@ public class ChatFragment extends Fragment {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Users users = dataSnapshot.getValue(Users.class);
                     usersArrayList.add(users);
                 }
@@ -83,13 +82,8 @@ public class ChatFragment extends Fragment {
         auth = FirebaseAuth.getInstance();
         mainUserRecycler = view.findViewById(R.id.mainUserRecycler);
         mainUserRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
-        useradapter = new UserAdapter(getContext(),usersArrayList);
+        useradapter = new UserAdapter(getContext(), usersArrayList);
         mainUserRecycler.setAdapter(useradapter);
-
-
-
-
-
         return view;
     }
 }

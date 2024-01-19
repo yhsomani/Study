@@ -1,3 +1,4 @@
+// UserAdapter.java
 package com.example.study;
 
 import android.content.Context;
@@ -19,6 +20,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     Context context;
     ArrayList<Users> usersArrayList;
+
     public UserAdapter(Context context, ArrayList<Users> usersArrayList) {
         this.context = context;
         this.usersArrayList = usersArrayList;
@@ -27,7 +29,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     @NonNull
     @Override
     public UserAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.uesr_item,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.uesr_item, parent, false);
         return new UserAdapter.ViewHolder(view);
     }
 
@@ -46,8 +48,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         CircleImageView userProfile;
-        TextView userName;;
+        TextView userName;
         TextView userStatus;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             userProfile = itemView.findViewById(R.id.userProfile);
