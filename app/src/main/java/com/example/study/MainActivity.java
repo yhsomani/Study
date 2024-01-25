@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                             break;
                         case R.id.Account:
                             getSupportActionBar().setTitle("Account");
-                            fragment = new AccountFragment(); // Updated instantiation
+                            fragment = AccountFragment.newInstance("", "");
                             break;
                         default:
                             getSupportActionBar().setTitle("Meet");

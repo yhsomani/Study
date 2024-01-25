@@ -1,9 +1,14 @@
 // AccountFragment.java
+
 package com.example.study;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,9 +28,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-// Import statements...
-
 public class AccountFragment extends Fragment {
+
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
 
     // UI components
     private Button updateProfileBtn;
@@ -33,25 +39,34 @@ public class AccountFragment extends Fragment {
     private TextView textViewStudentId;
     private TextView textViewEmail;
     private CircleImageView profileImg;
-
+    private boolean isLoadingUserData = false;
     private DatabaseReference userReference;
     private FirebaseUser currentUser;
 
     // Progress dialog to show loading or updating status
     private ProgressDialog progressDialog;
+    Button logoutBtn;
+    Button yes;
+    Button no;
 
     // Default constructor
     public AccountFragment() {
         // Required empty public constructor
     }
 
-    // onCreate method...
-
-    // onCreateView method...
+    public static Fragment newInstance(String param1, String param2) {
+        Fragment fragment = new AccountFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_account, container, false);
 
         // Initialize views and Firebase components
         initializeViews(view);
@@ -61,6 +76,8 @@ public class AccountFragment extends Fragment {
 
         // Load user data
         loadUserData();
+
+        return view;  // Make sure to return the inflated view
     }
 
     // Initialize views and Firebase components
@@ -70,6 +87,34 @@ public class AccountFragment extends Fragment {
         textViewStudentId = view.findViewById(R.id.textView13);
         textViewEmail = view.findViewById(R.id.textView15);
         profileImg = view.findViewById(R.id.profileImg);
+        logoutBtn = view.findViewById(R.id.logoutbtn);
+
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Dialog dialog = new Dialog(getActivity(), R.style.dialoge);
+                dialog.setContentView(R.layout.dialog_layout);
+                Button no,yes;
+                yes = dialog.findViewById(R.id.yesbtn);
+                no = dialog.findViewById(R.id.nobtn);
+                yes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        FirebaseAuth.getInstance().signOut();
+                        Intent intent = new Intent(getActivity(), LoginActivity.class);
+                        startActivity(intent);
+                        dialog.dismiss();
+                    }
+                });
+                no.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
+            }
+        });
 
         // Firebase
         FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -82,14 +127,18 @@ public class AccountFragment extends Fragment {
 
     // Load user data from Firebase
     private void loadUserData() {
-        progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("Loading User Data...");
-        progressDialog.show();
+        if (currentUser != null && !isLoadingUserData) {
+            isLoadingUserData = true;
+            progressDialog = new ProgressDialog(getContext());
+            progressDialog.setMessage("Loading User Data...");
+            progressDialog.show();
 
-        if (currentUser != null) {
-            userReference.addValueEventListener(new ValueEventListener() {
+            userReference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    progressDialog.dismiss(); // Dismiss the progress dialog once data is fetched
+                    isLoadingUserData = false;
+
                     if (snapshot.exists()) {
                         Users user = snapshot.getValue(Users.class);
                         if (user != null) {
@@ -100,15 +149,14 @@ public class AccountFragment extends Fragment {
 
                             // Load profile image using Glide
                             loadProfileImage(user.getProfilepic());
-
-                            progressDialog.dismiss(); // Dismiss the progress dialog
                         }
                     }
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-                    progressDialog.dismiss(); // Dismiss the progress dialog
+                    progressDialog.dismiss(); // Dismiss the progress dialog in case of error
+                    isLoadingUserData = false;
                     Toast.makeText(getContext(), "Error loading user data", Toast.LENGTH_SHORT).show();
                 }
             });
@@ -118,16 +166,15 @@ public class AccountFragment extends Fragment {
     // Load profile image using Glide
     private void loadProfileImage(String profileImageUrl) {
         if (getContext() != null && (profileImg != null)) {
-                if (profileImageUrl == null || profileImageUrl.isEmpty()) {
-                    // Use default profile image if user's profile image is not available
-                    profileImg.setImageResource(R.drawable.user_profile);
-                } else {
-                    // Load non-default image using Glide
-                    Glide.with(getContext())
-                            .load(profileImageUrl)
-                            .into(profileImg);
-                }
-
+            if (profileImageUrl == null || profileImageUrl.isEmpty()) {
+                // Use default profile image if the user's profile image is not available
+                profileImg.setImageResource(R.drawable.user_profile);
+            } else {
+                // Load non-default image using Glide
+                Glide.with(getContext())
+                        .load(profileImageUrl)
+                        .into(profileImg);
+            }
         }
     }
 

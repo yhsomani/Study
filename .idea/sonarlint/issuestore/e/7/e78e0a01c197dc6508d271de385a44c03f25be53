@@ -3,7 +3,3 @@ q
 java:S18456"TRename field "imageUri" to prevent any misunderstanding/clash with field "imageURI".(ÉìÒå8£úƒÔ1
 l
 java:S1659&"JDeclare "emailEditText" and all following declarations on a separate line.(ÇÕæùÿÿÿÿ8¥úƒÔ1
-n
-java:S1612˜"KReplace this lambda with method reference 'this::handleRegistrationResult'.(Âšı‘şÿÿÿÿ8£‰îƒÔ1
-n
-java:S1612©"KReplace this lambda with method reference 'this::handleRegistrationResult'.(æ©Øµşÿÿÿÿ8¨‰îƒÔ1
