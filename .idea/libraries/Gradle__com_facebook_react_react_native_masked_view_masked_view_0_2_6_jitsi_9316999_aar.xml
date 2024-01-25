@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.facebook.react:react-native-masked-view_masked-view:0.2.6-jitsi-9316999@aar" external-system-id="GRADLE">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/30d6170668d3dc3e07c4112ed85de2f2/transformed/jetified-react-native-masked-view_masked-view-0.2.6-jitsi-9316999/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/30d6170668d3dc3e07c4112ed85de2f2/transformed/jetified-react-native-masked-view_masked-view-0.2.6-jitsi-9316999/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.facebook.react/react-native-masked-view_masked-view/0.2.6-jitsi-9316999/f8f6aaee4dd6189b569b3e787aac7953b483c890/react-native-masked-view_masked-view-0.2.6-jitsi-9316999-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

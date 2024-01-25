@@ -13,6 +13,8 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
+// Import statements...
+
 public class MainActivity extends AppCompatActivity {
 
     // UI components
@@ -54,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Navigation item selection listener
-    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
+    private final BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
 
                 @Override
