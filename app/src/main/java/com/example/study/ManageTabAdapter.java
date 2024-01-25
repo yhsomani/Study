@@ -9,8 +9,8 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 public class ManageTabAdapter extends FragmentPagerAdapter {
 
-    private Context myContext;
-    private int totalTabs;
+    private final Context myContext;
+    private final int totalTabs;
 
     // Constructor to initialize the context and totalTabs
     public ManageTabAdapter(Context context, FragmentManager fm, int totalTabs) {

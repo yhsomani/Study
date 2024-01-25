@@ -30,9 +30,6 @@ public class ChatFragment extends Fragment {
     private FirebaseDatabase database;
     private ArrayList<Users> usersArrayList;
 
-    private String mParam1;
-    private String mParam2;
-
     public ChatFragment() {
         // Required empty public constructor
     }

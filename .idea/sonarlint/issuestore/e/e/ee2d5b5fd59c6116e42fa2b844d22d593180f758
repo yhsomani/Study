@@ -1,17 +1,11 @@
 
 E
-java:S16046"(Make this anonymous inner class a lambda(ÏÈ±õ8ªêÆ‚Ô1
+java:S16046"(Make this anonymous inner class a lambda(ÏÈ±õ8¸®ĞƒÔ1
 J
-java:S1604="(Make this anonymous inner class a lambda(ïËà¤ÿÿÿÿÿ8«êÆ‚Ô1
+java:S1604="(Make this anonymous inner class a lambda(ïËà¤ÿÿÿÿÿ8¹®ĞƒÔ1
 D
-java:S1604l"(Make this anonymous inner class a lambda(ÍÖX8Ûëó•Ò1
+java:S1604l"(Make this anonymous inner class a lambda(ÍÖX8¹®ĞƒÔ1
 E
-java:S5411I"(Use a primitive boolean expression here.(éìşä8¬êÆ‚Ô1
+java:S5411I"(Use a primitive boolean expression here.(éìşä8º®ĞƒÔ1
 P
-java:S1659".Declare "passwordEditText" on a separate line.(ËßÓ€ıÿÿÿÿ8‰ìÆ‚Ô1
-S
-java:S1874%"6Remove this use of "ProgressDialog"; it is deprecated.(ğİıº8ìÆ‚Ô1
-S
-java:S1874-"6Remove this use of "ProgressDialog"; it is deprecated.(çöĞ×8˜ìÆ‚Ô1
-U
-java:S1874„"2Remove this use of "setMessage"; it is deprecated.(©çø¶ûÿÿÿÿ8¹îó•Ò1
+java:S1659".Declare "passwordEditText" on a separate line.(ËßÓ€ıÿÿÿÿ8±°ĞƒÔ1

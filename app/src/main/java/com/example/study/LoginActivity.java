@@ -1,13 +1,14 @@
 // LoginActivity.java
 package com.example.study;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+
+import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -20,7 +21,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         // Task 1: Hide the action bar
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         // Task 2: Initialize TabLayout and ViewPager
         tabLayout = findViewById(R.id.tabLayout);

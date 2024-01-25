@@ -1,12 +1,10 @@
+// AccountFragment.java
 package com.example.study;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,15 +23,17 @@ import com.google.firebase.database.ValueEventListener;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+// Import statements...
+
 public class AccountFragment extends Fragment {
 
     // UI components
     private Button updateProfileBtn;
-    private TextView textViewName, textViewStudentId, textViewEmail;
+    private TextView textViewName;
+    private TextView textViewStudentId;
+    private TextView textViewEmail;
     private CircleImageView profileImg;
 
-    // Firebase
-    private FirebaseAuth auth;
     private DatabaseReference userReference;
     private FirebaseUser currentUser;
 
@@ -71,7 +71,8 @@ public class AccountFragment extends Fragment {
         textViewEmail = view.findViewById(R.id.textView15);
         profileImg = view.findViewById(R.id.profileImg);
 
-        auth = FirebaseAuth.getInstance();
+        // Firebase
+        FirebaseAuth auth = FirebaseAuth.getInstance();
         currentUser = auth.getCurrentUser();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         if (currentUser != null) {
@@ -116,8 +117,7 @@ public class AccountFragment extends Fragment {
 
     // Load profile image using Glide
     private void loadProfileImage(String profileImageUrl) {
-        if (getContext() != null) {
-            if (profileImg != null) {
+        if (getContext() != null && (profileImg != null)) {
                 if (profileImageUrl == null || profileImageUrl.isEmpty()) {
                     // Use default profile image if user's profile image is not available
                     profileImg.setImageResource(R.drawable.user_profile);
@@ -127,7 +127,7 @@ public class AccountFragment extends Fragment {
                             .load(profileImageUrl)
                             .into(profileImg);
                 }
-            }
+
         }
     }
 

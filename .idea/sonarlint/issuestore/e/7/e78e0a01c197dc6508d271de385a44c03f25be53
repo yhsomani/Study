@@ -1,25 +1,9 @@
 
 q
-java:S18456"TRename field "imageUri" to prevent any misunderstanding/clash with field "imageURI".(ÉìÒå8ƒÜ³Ò1
+java:S18456"TRename field "imageUri" to prevent any misunderstanding/clash with field "imageURI".(ÉìÒå8£úƒÔ1
 l
-java:S1659&"JDeclare "emailEditText" and all following declarations on a separate line.(ÇÕæùÿÿÿÿ8…Ü³Ò1
-S
-java:S1874)"6Remove this use of "ProgressDialog"; it is deprecated.(ğİıº8‘Ü³Ò1
-S
-java:S1874B"6Remove this use of "ProgressDialog"; it is deprecated.(çöĞ×8™Ü³Ò1
-`
-java:S1874n">Remove this use of "startActivityForResult"; it is deprecated.(™äøÿÿÿÿ8¦Ü³Ò1
-T
-java:S1874}"2Remove this use of "setMessage"; it is deprecated.(Áò¢§ÿÿÿÿÿ8©Ü³Ò1
+java:S1659&"JDeclare "emailEditText" and all following declarations on a separate line.(ÇÕæùÿÿÿÿ8¥úƒÔ1
 n
-java:S1612˜"KReplace this lambda with method reference 'this::handleRegistrationResult'.(Âšı‘şÿÿÿÿ8®Ü³Ò1
-P
-java:S1874"2Remove this use of "setMessage"; it is deprecated.(ÉÕ‹ı8°Ü³Ò1
-P
-java:S1874£"2Remove this use of "setMessage"; it is deprecated.(…õ®÷8±Ü³Ò1
+java:S1612˜"KReplace this lambda with method reference 'this::handleRegistrationResult'.(Âšı‘şÿÿÿÿ8£‰îƒÔ1
 n
-java:S1612©"KReplace this lambda with method reference 'this::handleRegistrationResult'.(æ©Øµşÿÿÿÿ8³Ü³Ò1
-m
-java:S1874½"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(™­²©ùÿÿÿÿ8´ŠÊ³Ò1
-[
-java:S1874¾"8Remove this use of "onActivityResult"; it is deprecated.(ß¬©úÿÿÿÿ8µŠÊ³Ò1
+java:S1612©"KReplace this lambda with method reference 'this::handleRegistrationResult'.(æ©Øµşÿÿÿÿ8¨‰îƒÔ1

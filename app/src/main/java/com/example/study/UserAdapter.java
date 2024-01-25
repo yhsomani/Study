@@ -19,10 +19,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     // Context to be used in the adapter
-    private Context context;
+    private final Context context;
 
     // ArrayList to hold user data
-    private ArrayList<Users> usersArrayList;
+    private final ArrayList<Users> usersArrayList;
 
     // Default profile image URL
     private static final String DEFAULT_PROFILE_IMAGE_URL = "https://firebasestorage.googleapis.com/v0/b/study-acbc9.appspot.com/o/man-user-color-icon.png?alt=media&token=4604a5d3-0554-4b11-bcc3-c28499e298f8";
