@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    tools:context=".ChatWindowActivity">
+    <LinearLayout
+        android:id="@+id/linearlayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerInParent="true"
+        android:layout_margin="0dp"
+        android:background="@drawable/chat_user_profile"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/userProfile"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:src="@drawable/user_profile"
+            app:civ_border_color="#FF000000"
+            app:civ_border_width="2dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/receiverName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="@string/receiver_s_name"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                app:fontFamily="@font/play_bold"
+                />
+            <TextView
+                android:id="@+id/receiverStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="Receiver's Status"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                app:fontFamily="@font/play_bold" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearlayout1"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:padding="13dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="3dp"
+        android:orientation="horizontal">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/white"
+            app:cardCornerRadius="25dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginEnd="7dp"
+            android:layout_weight="1">
+
+            <EditText
+                android:id="@+id/TextMessage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:hint="Type a message"
+                android:padding="13dp"
+                android:textSize="15sp" />
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/sendCardViewButton"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="#28DF99"
+            android:layout_marginEnd="10dp"
+            app:cardCornerRadius="25dp">
+
+            <ImageButton
+                android:id="@+id/sendButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/send"
+                android:background="@null"
+                android:layout_gravity="center"/>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+</RelativeLayout>

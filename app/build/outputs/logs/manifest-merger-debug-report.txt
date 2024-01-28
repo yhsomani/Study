@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:2:1-61:12
-INJECTED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:2:1-61:12
-INJECTED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:2:1-61:12
-INJECTED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:2:1-61:12
+ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:2:1-66:12
+INJECTED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:2:1-66:12
+INJECTED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:2:1-66:12
+INJECTED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:2:1-66:12
 MERGED from [org.jitsi.react:jitsi-meet-sdk:4.1.0] C:\Users\ysoma\.gradle\caches\transforms-3\bb9082b6cba4257848f37bd23db07371\transformed\jetified-jitsi-meet-sdk-4.1.0\AndroidManifest.xml:2:1-73:12
 MERGED from [com.facebook.react:react-native-screens:2.18.1-jitsi-9316999] C:\Users\ysoma\.gradle\caches\transforms-3\8bd9686255532dc90a12d9add0169b33\transformed\jetified-react-native-screens-2.18.1-jitsi-9316999\AndroidManifest.xml:2:1-11:12
 MERGED from [com.google.android.material:material:1.11.0] C:\Users\ysoma\.gradle\caches\transforms-3\ab6a5a68ef8a31367459ed90d33bf86d\transformed\material-1.11.0\AndroidManifest.xml:17:1-24:12
@@ -227,8 +227,8 @@ MERGED from [org.jitsi.react:jitsi-meet-sdk:4.1.0] C:\Users\ysoma\.gradle\caches
 	android:name
 		ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:18:22-74
 application
-ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:20:5-59:19
-INJECTED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:20:5-59:19
+ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:20:5-64:19
+INJECTED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:20:5-64:19
 MERGED from [org.jitsi.react:jitsi-meet-sdk:4.1.0] C:\Users\ysoma\.gradle\caches\transforms-3\bb9082b6cba4257848f37bd23db07371\transformed\jetified-jitsi-meet-sdk-4.1.0\AndroidManifest.xml:32:5-71:19
 MERGED from [org.jitsi.react:jitsi-meet-sdk:4.1.0] C:\Users\ysoma\.gradle\caches\transforms-3\bb9082b6cba4257848f37bd23db07371\transformed\jetified-jitsi-meet-sdk-4.1.0\AndroidManifest.xml:32:5-71:19
 MERGED from [com.google.android.material:material:1.11.0] C:\Users\ysoma\.gradle\caches\transforms-3\ab6a5a68ef8a31367459ed90d33bf86d\transformed\material-1.11.0\AndroidManifest.xml:22:5-20
@@ -317,34 +317,46 @@ MERGED from [com.android.installreferrer:installreferrer:1.1.2] C:\Users\ysoma\.
 		ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:21:9-35
 	android:theme
 		ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:26:9-43
+activity#com.example.study.ChatWindowActivity
+ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:27:9-29:40
+	android:exported
+		ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:29:13-37
+	android:name
+		ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:28:13-47
+activity#com.example.study.ChatWindowFragment
+ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:30:9-32:40
+	android:exported
+		ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:32:13-37
+	android:name
+		ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:31:13-47
 activity#com.example.study.SplashActivity
-ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:28:9-34:20
+ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:33:9-39:20
 	android:name
-		ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:29:13-43
+		ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:33:19-49
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:30:13-33:29
+ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:34:13-38:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:31:17-69
+ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:35:17-69
 	android:name
-		ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:31:25-66
+		ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:35:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:32:17-77
+ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:37:17-77
 	android:name
-		ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:32:27-74
+		ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:37:27-74
 activity#com.example.study.LoginActivity
-ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:35:9-44:20
+ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:40:9-49:20
 	android:name
-		ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:36:13-42
+		ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:40:19-48
 activity#com.example.study.MainActivity
-ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:45:9-54:20
+ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:50:9-59:20
 	android:name
-		ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:46:13-41
+		ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:50:19-47
 meta-data#preloaded_fonts
-ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:56:9-58:57
+ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:61:9-63:57
 	android:resource
-		ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:58:13-54
+		ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:63:13-54
 	android:name
-		ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:57:13-43
+		ADDED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml:62:13-43
 uses-sdk
 INJECTED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\ysoma\AndroidStudioProjects\Study\app\src\main\AndroidManifest.xml

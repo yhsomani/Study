@@ -3735,7 +3735,9 @@ drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
 drawable camera_add
+drawable chat_user_profile
 drawable chaticon
+drawable circular_background
 drawable common_full_open_on_phone
 drawable common_google_signin_btn_icon_dark
 drawable common_google_signin_btn_icon_dark_focused
@@ -3763,8 +3765,10 @@ drawable design_snackbar_background
 drawable edit_background_qr
 drawable edit_button
 drawable email_icon
+drawable empty_background
 drawable googleg_disabled_color_18
 drawable googleg_standard_color_18
+drawable gradient_background
 drawable ic_arrow_back_black_24
 drawable ic_clear_black_24
 drawable ic_clock_black_24dp
@@ -3792,6 +3796,7 @@ drawable lock_icon
 drawable login_background
 drawable loginscreen_img
 drawable logo
+drawable logout
 drawable m3_avd_hide_password
 drawable m3_avd_show_password
 drawable m3_bottom_sheet_drag_handle
@@ -3871,6 +3876,8 @@ drawable person_icon
 drawable qr_code_scanner
 drawable redbox_top_border_background
 drawable relative_border
+drawable send
+drawable shape_dialog
 drawable test_level_drawable
 drawable textbox
 drawable tooltip_frame_dark
@@ -3899,6 +3906,7 @@ id SHOW_PROGRESS
 id SYM
 id TOP_END
 id TOP_START
+id TextMessage
 id accelerate
 id accessibility_action_clickable_span
 id accessibility_actions
@@ -4176,12 +4184,14 @@ id light
 id line1
 id line3
 id linear
+id linearlayout1
 id listMode
 id list_item
 id login_btn
 id login_email
 id login_password
 id logo
+id logoutbtn
 id m3_side_sheet
 id mainUserRecycler
 id marquee
@@ -4257,6 +4267,7 @@ id neverCompleteToEnd
 id neverCompleteToStart
 id noScroll
 id noState
+id nobtn
 id none
 id normal
 id north
@@ -4307,6 +4318,8 @@ id progress_horizontal
 id radio
 id ratio
 id react_test_id
+id receiverName
+id receiverStatus
 id rectangles
 id register_btn
 id register_email
@@ -4360,6 +4373,8 @@ id secretCodeBox
 id select_dialog_listview
 id selected
 id selection_type
+id sendButton
+id sendCardViewButton
 id shareBtn
 id sharedValueSet
 id sharedValueUnset
@@ -4491,6 +4506,7 @@ id wrap_content
 id wrap_content_constrained
 id x_left
 id x_right
+id yesbtn
 integer abc_config_activityDefaultDur
 integer abc_config_activityShortDur
 integer app_bar_elevation_anim_duration
@@ -4609,6 +4625,7 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
 layout action_bar
+layout activity_chat_window
 layout activity_jitsi_meet
 layout activity_login
 layout activity_main
@@ -4634,6 +4651,7 @@ layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
 layout dev_loading_view
+layout dialog_layout
 layout dp_example
 layout fps_view
 layout fragment_account
@@ -4717,7 +4735,7 @@ layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout support_simple_spinner_dropdown_item
-layout uesr_item
+layout user_item
 menu bottom_navigation_menu
 mipmap ic_launcher
 mipmap ic_launcher_round
@@ -5044,6 +5062,7 @@ string path_password_strike_through
 string progressbar_description
 string project_id
 string radiogroup_description
+string receiver_s_name
 string rn_tab_description
 string scrollbar_description
 string search_description
@@ -6211,6 +6230,7 @@ style Widget_MaterialComponents_Toolbar_PrimarySurface
 style Widget_MaterialComponents_Toolbar_Surface
 style Widget_MaterialComponents_Tooltip
 style Widget_Support_CoordinatorLayout
+style dialoge
 style redboxButton
 styleable ActionBar background backgroundSplit backgroundStacked contentInsetEnd contentInsetEndWithActions contentInsetLeft contentInsetRight contentInsetStart contentInsetStartWithNavigation customNavigationLayout displayOptions divider elevation height hideOnContentScroll homeAsUpIndicator homeLayout icon indeterminateProgressStyle itemPadding logo navigationMode popupTheme progressBarPadding progressBarStyle subtitle subtitleTextStyle title titleTextStyle
 styleable ActionBarLayout android_layout_gravity

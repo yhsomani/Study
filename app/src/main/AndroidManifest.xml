@@ -24,16 +24,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Study">
-
         <activity
-            android:name=".SplashActivity">
+            android:name=".ChatWindowActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ChatWindowFragment"
+            android:exported="false" />
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".LoginActivity">
+        <activity android:name=".LoginActivity">
+
             <!-- Uncomment the intent-filter if LoginActivity is a launch activity -->
             <!--
             <intent-filter>
@@ -42,8 +47,8 @@
             </intent-filter>
             -->
         </activity>
-        <activity
-            android:name=".MainActivity">
+        <activity android:name=".MainActivity">
+
             <!-- Uncomment the intent-filter if MainActivity is a launch activity -->
             <!--
             <intent-filter>

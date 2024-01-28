@@ -1,9 +1,13 @@
 package com.example.study;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -69,22 +73,40 @@ public class ChatFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 // Clear the userArrayList before adding new data
                 usersArrayList.clear();
+
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     // Convert dataSnapshot to Users object and add to the userArrayList
                     Users users = dataSnapshot.getValue(Users.class);
                     usersArrayList.add(users);
-                    // Notify the adapter about the data change
-                    int position = usersArrayList.indexOf(users);
-                    userAdapter.notifyItemInserted(position);
                 }
+
+                // Notify the adapter about the bulk data change using a delay
+                // This avoids triggering the UI update for every change
+                notifyAdapter();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 // Handle database error if needed
+                Log.e("ChatFragment", "Database Error: " + error.getMessage());
+
+                // You can also show a toast message
+                if (getContext() != null) {
+                    Toast.makeText(getContext(), "Database Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
         return view;
+    }
+
+    private void notifyAdapter() {
+        // Use a Handler to post the notifyDataSetChanged to the main thread
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                userAdapter.notifyDataSetChanged();
+            }
+        });
     }
 }

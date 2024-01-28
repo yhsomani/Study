@@ -53,6 +53,12 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/Theme.Study" >
+        <activity
+            android:name="com.example.study.ChatWindowActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.study.ChatWindowFragment"
+            android:exported="false" />
         <activity android:name="com.example.study.SplashActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

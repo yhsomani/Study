@@ -2,6 +2,7 @@
 package com.example.study;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +39,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Inflate the user item layout
-        View view = LayoutInflater.from(context).inflate(R.layout.uesr_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.user_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -48,18 +49,25 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         // Get the user at the current position
         Users user = usersArrayList.get(position);
 
-        // Check if the user has a profile image URL
-        if (user.getProfilepic() != null && !user.getProfilepic().isEmpty()) {
-            // If yes, load the profile image using Picasso
-            Picasso.get().load(user.getProfilepic()).into(holder.userProfile);
-        } else {
-            // If no, load the default image
-            Picasso.get().load(DEFAULT_PROFILE_IMAGE_URL).into(holder.userProfile);
-        }
+        // Load profile image using the modified method
+        loadProfileImage(user.getProfilepic(), holder.userProfile);
 
         // Set user name and status in the ViewHolder
         holder.userName.setText(user.getUserName());
         holder.userStatus.setText(user.getStatus());
+
+        // Set click listener
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ChatWindowActivity.class);
+                intent.putExtra("name", user.getUserName());
+                intent.putExtra("receiverImage", user.getProfilepic());
+                intent.putExtra("status",user.getStatus());
+                intent.putExtra("uid", user.getUserId());
+                context.startActivity(intent);
+            }
+        });
     }
 
     // Returns the total number of items in the dataset
@@ -80,6 +88,16 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             userProfile = itemView.findViewById(R.id.userProfile);
             userName = itemView.findViewById(R.id.userName);
             userStatus = itemView.findViewById(R.id.userStatus);
+        }
+    }
+
+    // Separate method to load profile image using Picasso
+    private void loadProfileImage(String profileImageUrl, CircleImageView imageView) {
+        if (profileImageUrl != null && !profileImageUrl.isEmpty()) {
+            Picasso.get().load(profileImageUrl).into(imageView);
+        } else {
+            // If no profile image, load the default image
+            Picasso.get().load(DEFAULT_PROFILE_IMAGE_URL).into(imageView);
         }
     }
 }

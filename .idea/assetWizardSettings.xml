@@ -28,10 +28,11 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="autoMirrored" value="true" />
                             <entry key="color" value="fdfdfe" />
-                            <entry key="outputName" value="baseline_mark_unread_chat_alt_24" />
-                            <entry key="sourceFile" value="C:\Users\ysoma\Videos\camera_add.svg" />
+                            <entry key="outputName" value="send" />
+                            <entry key="sourceFile" value="C:\Users\ysoma\Downloads\send.svg" />
                           </map>
                         </option>
                       </PersistentState>

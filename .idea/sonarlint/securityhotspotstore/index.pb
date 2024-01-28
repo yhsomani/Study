@@ -833,3 +833,5 @@ w
 G.idea/sonarlint/issuestore/b/b/bb65530358544b31386bf5ded0875253f78be4e5,7\7\7735b7dd49fa156d97db009b88a7b2423dbf5dcd
 w
 G.idea/sonarlint/issuestore/3/b/3b1c987ed9bdd86119aedace4fa66aec745de88c,8\4\846584e73a6313e7bbf0e5bc0b6cde9f8cd6ba69
+k
+;app/src/main/java/com/example/study/ChatWindowFragment.java,5\3\5313cbfc826b5ee7a32d7c0ef2ce45a051cc170a

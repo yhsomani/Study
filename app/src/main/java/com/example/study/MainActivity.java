@@ -13,8 +13,6 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
-// Import statements...
-
 public class MainActivity extends AppCompatActivity {
 
     // UI components
