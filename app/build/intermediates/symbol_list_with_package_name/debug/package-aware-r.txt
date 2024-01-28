@@ -3874,9 +3874,11 @@ drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
 drawable person_icon
 drawable qr_code_scanner
+drawable reciver_shape
 drawable redbox_top_border_background
 drawable relative_border
 drawable send
+drawable sender_shape
 drawable shape_dialog
 drawable test_level_drawable
 drawable textbox
@@ -4221,6 +4223,7 @@ id material_value_index
 id matrix
 id media_actions
 id message
+id messageRecyclerView
 id middle
 id mini
 id month_grid
@@ -4230,6 +4233,7 @@ id month_navigation_next
 id month_navigation_previous
 id month_title
 id motion_base
+id msgsendertyp
 id mtrl_anchor_parent
 id mtrl_calendar_day_selector_frame
 id mtrl_calendar_days_of_week
@@ -4312,7 +4316,9 @@ id pin
 id position
 id postLayout
 id pressed
+id pro
 id profileImg
+id profilerggg
 id progress_circular
 id progress_horizontal
 id radio
@@ -4320,6 +4326,7 @@ id ratio
 id react_test_id
 id receiverName
 id receiverStatus
+id recivertextset
 id rectangles
 id register_btn
 id register_email
@@ -4727,6 +4734,7 @@ layout notification_template_media
 layout notification_template_media_custom
 layout notification_template_part_chronometer
 layout notification_template_part_time
+layout reciver_layout
 layout redbox_item_frame
 layout redbox_item_title
 layout redbox_view
@@ -4734,6 +4742,7 @@ layout sdp_example
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
+layout sender_layout
 layout support_simple_spinner_dropdown_item
 layout user_item
 menu bottom_navigation_menu
