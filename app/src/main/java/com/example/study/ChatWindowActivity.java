@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,10 +31,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ChatWindowActivity extends AppCompatActivity {
 
     public static String receiverImage;
-    String receiverImg;
-    private String receiverName;
-    private String receiverStatus;
-    private String senderUid;
+    public static String senderImg;
+    String receiverImg, senderRoom, receiverRoom, receiverUid, receiverName, receiverStatus, senderUid;
     private CircleImageView profileImage;
     private TextView profileName;
     private TextView statusTextView;
@@ -41,11 +40,10 @@ public class ChatWindowActivity extends AppCompatActivity {
     private EditText textMessage;
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
-    public static String senderImg;
-    String senderRoom, receiverRoom, receiverUid;
     ArrayList<MessageModel> messagesArrayList;
     private RecyclerView messageRecyclerView;
     private MessagesAdapter messagesAdapter;
+    CardView cardViewButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +60,10 @@ public class ChatWindowActivity extends AppCompatActivity {
         sendButton = findViewById(R.id.sendButton);
         textMessage = findViewById(R.id.TextMessage);
         messageRecyclerView = findViewById(R.id.messageRecyclerView);
+        cardViewButton = findViewById(R.id.sendCardViewButton);
+
+        // Initialize messagesArrayList
+        messagesArrayList = new ArrayList<>();
 
         if (getIntent() != null) {
             receiverImg = getIntent().getStringExtra("receiverImage");
@@ -122,26 +124,24 @@ public class ChatWindowActivity extends AppCompatActivity {
         });
 
         senderUid = firebaseAuth.getUid();
-        if (senderUid != null && receiverUid != null) {
-            senderRoom = senderUid + receiverUid;
-            receiverRoom = receiverUid + senderUid;
+        senderRoom = senderUid + receiverUid;
+        receiverRoom = receiverUid + senderUid;
 
-            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-            layoutManager.setStackFromEnd(true);
-            messageRecyclerView.setLayoutManager(layoutManager);
-            messagesAdapter = new MessagesAdapter(ChatWindowActivity.this, messagesArrayList);
-            messageRecyclerView.setAdapter(messagesAdapter);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setStackFromEnd(true);
+        messageRecyclerView.setLayoutManager(layoutManager);
 
-            sendButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    handleSendButtonClick();
-                }
-            });
-        } else {
-            // Handle the case where senderUid or receiverUid is null
-            // You might want to show an error message or take appropriate action
-        }
+        // Initialize messagesAdapter
+        messagesAdapter = new MessagesAdapter(ChatWindowActivity.this, messagesArrayList);
+        messageRecyclerView.setAdapter(messagesAdapter);
+
+
+        sendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleSendButtonClick();
+            }
+        });
     }
 
     private void handleSendButtonClick() {
@@ -155,7 +155,6 @@ public class ChatWindowActivity extends AppCompatActivity {
         MessageModel messages = new MessageModel(message, senderUid, date.getTime());
 
         if (senderRoom != null && receiverRoom != null) {
-            firebaseDatabase=FirebaseDatabase.getInstance();
             firebaseDatabase.getReference().child("chats")
                     .child(senderRoom)
                     .child("messages")
@@ -169,7 +168,7 @@ public class ChatWindowActivity extends AppCompatActivity {
                                     .push().setValue(messages).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
-
+                                            // Handle completion if needed
                                         }
                                     });
                         }
