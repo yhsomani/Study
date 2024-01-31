@@ -1,7 +1,6 @@
 package com.example.study;
 
-import static com.example.study.ChatWindowActivity.receiverImage;
-import static com.example.study.ChatWindowActivity.senderImg;
+import static com.example.study.ChatWindowActivity.*;
 
 import android.app.AlertDialog;
 import android.content.Context;
