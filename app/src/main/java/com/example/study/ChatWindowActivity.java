@@ -42,127 +42,114 @@ public class ChatWindowActivity extends AppCompatActivity {
 
     private String senderRoom, receiverRoom;
 
-    private static String senderImg;
-    private static String receiverImgStatic;
+     static String senderImg;
+     static String receiverImgStatic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_window);
         getSupportActionBar().hide();
-
-        initializeViews();
-        setupRecyclerView();
-
         database = FirebaseDatabase.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
 
-        retrieveIntentData();
-
-        loadChatMessages();
-
-        configureSendButton();
-    }
-
-    private void initializeViews() {
-        receiverStatusTextView = findViewById(R.id.receiverStatus);
-        sendButton = findViewById(R.id.sendButton);
-        textMessage = findViewById(R.id.textMessage);
-        receiverNameTextView = findViewById(R.id.receiverName);
-        profile = findViewById(R.id.userImage);
-        messageRecyclerView = findViewById(R.id.messageRecyclerView);
-    }
-
-    private void setupRecyclerView() {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setStackFromEnd(true);
-        messageRecyclerView.setLayoutManager(linearLayoutManager);
-        messagesArrayList = new ArrayList<>();
-        messagesAdapter = new MessagesAdapter(ChatWindowActivity.this, messagesArrayList);
-        messageRecyclerView.setAdapter(messagesAdapter);
-    }
-
-    private void retrieveIntentData() {
         receiverName = getIntent().getStringExtra("recipientName");
         receiverImg = getIntent().getStringExtra("recipientImage");
         receiverUid = getIntent().getStringExtra("recipientId");
         receiverStatus = getIntent().getStringExtra("recipientStatus");
 
+
+        messagesArrayList = new ArrayList<>();
+
+        sendButton = findViewById(R.id.sendButton);
+        textMessage = findViewById(R.id.textMessage);
+        receiverNameTextView = findViewById(R.id.receiverName);
+        receiverStatusTextView = findViewById(R.id.receiverStatus);
+        profile = findViewById(R.id.userImage);
+        messageRecyclerView = findViewById(R.id.messageRecyclerView);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setStackFromEnd(true);
+        messageRecyclerView.setLayoutManager(linearLayoutManager);
+        messagesAdapter = new MessagesAdapter(this,messagesArrayList);
+        messageRecyclerView.setAdapter(messagesAdapter);
+
+
         Picasso.get().load(receiverImg).into(profile);
         receiverNameTextView.setText(receiverName);
         receiverStatusTextView.setText(receiverStatus);
 
-        senderUid = firebaseAuth.getUid();
-        senderRoom = senderUid + receiverUid;
-        receiverRoom = receiverUid + senderUid;
+        senderUid =  firebaseAuth.getUid();
 
-        // Set values for static variables
-        senderImg = "URL_TO_YOUR_SENDER_IMAGE"; // Replace with the actual URL
-        receiverImgStatic = "URL_TO_YOUR_RECEIVER_IMAGE"; // Replace with the actual URL
-    }
+        senderRoom = senderUid+receiverUid;
+        receiverRoom = receiverUid+senderUid;
 
-    public static String getSenderImg() {
-        return senderImg;
-    }
 
-    public static String getReceiverImgStatic() {
-        return receiverImgStatic;
-    }
 
-    private void loadChatMessages() {
-        DatabaseReference chatReference = database.getReference().child("chats").child(senderRoom).child("messages");
-        chatReference.addValueEventListener(new ValueEventListener() {
+        DatabaseReference  reference = database.getReference().child("user").child(firebaseAuth.getUid());
+        DatabaseReference  chatreference = database.getReference().child("chats").child(senderRoom).child("messages");
+
+
+        chatreference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 messagesArrayList.clear();
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    MessageModel message = dataSnapshot.getValue(MessageModel.class);
-                    messagesArrayList.add(message);
+                for (DataSnapshot dataSnapshot:snapshot.getChildren()){
+                    MessageModel messages = dataSnapshot.getValue(MessageModel.class);
+                    messagesArrayList.add(messages);
                 }
                 messagesAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(ChatWindowActivity.this, "Database Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+
             }
         });
-    }
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                senderImg= snapshot.child("profilepic").getValue().toString();
+                receiverImgStatic=receiverImg;
+            }
 
-    private void configureSendButton() {
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendMessage();
+                String message = textMessage.getText().toString();
+                if (message.isEmpty()){
+                    Toast.makeText(ChatWindowActivity.this, "Enter The Message First", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                textMessage.setText("");
+                Date date = new Date();
+                MessageModel messagess = new MessageModel(message,senderUid,date.getTime());
+
+                database=FirebaseDatabase.getInstance();
+                database.getReference().child("chats")
+                        .child(senderRoom)
+                        .child("messages")
+                        .push().setValue(messagess).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                database.getReference().child("chats")
+                                        .child(receiverRoom)
+                                        .child("messages")
+                                        .push().setValue(messagess).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                            }
+                                        });
+                            }
+                        });
             }
         });
-    }
 
-    private void sendMessage() {
-        String messageText = textMessage.getText().toString().trim();
-        if (!messageText.isEmpty()) {
-            Date date = new Date();
-            MessageModel newMessage = new MessageModel(messageText, senderUid, date.getTime());
-
-            saveMessage(senderRoom, newMessage);
-            saveMessage(receiverRoom, newMessage);
-
-            // Clear the input field after sending the message
-            textMessage.setText("");
-        } else {
-            Toast.makeText(ChatWindowActivity.this, "Enter The Message First", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void saveMessage(String room, MessageModel message) {
-        database.getReference().child("chats").child(room).child("messages").push().setValue(message)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (!task.isSuccessful()) {
-                            Toast.makeText(ChatWindowActivity.this, "Failed to send message", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
     }
 }

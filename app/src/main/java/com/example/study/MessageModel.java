@@ -1,37 +1,20 @@
 package com.example.study;
 
 public class MessageModel {
-    private String messageId; // Added for a unique identifier
     private String message;
     private String senderId;
-    private long timestamp;
+    private long timeStamp;
 
-    // Required default constructor for Firebase
     public MessageModel() {
-        // Firebase uses this default constructor for deserialization
+        // Required empty public constructor
     }
 
-    // Constructor to initialize the message model
-    public MessageModel(String messageId, String message, String senderId, long timestamp) {
-        this.messageId = messageId;
+    public MessageModel(String message, String senderId, long timeStamp) {
         this.message = message;
         this.senderId = senderId;
-        this.timestamp = timestamp;
+        this.timeStamp = timeStamp;
     }
 
-    public MessageModel(String message, String senderUid, long time) {
-    }
-
-    // Getter and Setter methods for the messageId
-    public String getMessageId() {
-        return messageId;
-    }
-
-    public void setMessageId(String messageId) {
-        this.messageId = messageId;
-    }
-
-    // Getter and Setter methods for the message
     public String getMessage() {
         return message;
     }
@@ -40,7 +23,6 @@ public class MessageModel {
         this.message = message;
     }
 
-    // Getter and Setter methods for the sender ID
     public String getSenderId() {
         return senderId;
     }
@@ -49,25 +31,11 @@ public class MessageModel {
         this.senderId = senderId;
     }
 
-    // Getter and Setter methods for the timestamp
-    public long getTimestamp() {
-        return timestamp;
+    public long getTimeStamp() {
+        return timeStamp;
     }
 
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
+    public void setTimeStamp(long timeStamp) {
+        this.timeStamp = timeStamp;
     }
-
-    // Optional: Override toString() for easier debugging
-    @Override
-    public String toString() {
-        return "MessageModel{" +
-                "messageId='" + messageId + '\'' +
-                ", message='" + message + '\'' +
-                ", senderId='" + senderId + '\'' +
-                ", timestamp=" + timestamp +
-                '}';
-    }
-
-    // Optional: Add other utility methods as needed
 }
