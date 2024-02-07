@@ -3,18 +3,17 @@ package com.example.study;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,7 +28,6 @@ public class ChatFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     private RecyclerView mainUserRecycler;
-    private FirebaseAuth auth;
     private UserAdapter userAdapter;
     private FirebaseDatabase database;
     private ArrayList<Users> usersArrayList;
@@ -54,7 +52,7 @@ public class ChatFragment extends Fragment {
 
         // Initialize Firebase database and get reference to "user" node
         database = FirebaseDatabase.getInstance();
-        DatabaseReference reference = database.getReference("user"); // Use direct reference to "user" node
+        DatabaseReference reference = database.getReference("user");
 
         // Initialize the user list
         usersArrayList = new ArrayList<>();
@@ -87,13 +85,8 @@ public class ChatFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // Handle database error if needed
-                Log.e("ChatFragment", "Database Error: " + error.getMessage());
-
-                // You can also show a toast message
-                if (getContext() != null) {
-                    Toast.makeText(getContext(), "Database Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                }
+                // Handle database error
+                handleDatabaseError(error);
             }
         });
 
@@ -102,11 +95,23 @@ public class ChatFragment extends Fragment {
 
     private void notifyAdapter() {
         // Use a Handler to post the notifyDataSetChanged to the main thread
-        new Handler(Looper.getMainLooper()).post(new Runnable() {
-            @Override
-            public void run() {
-                userAdapter.notifyDataSetChanged();
-            }
-        });
+        new Handler(Looper.getMainLooper()).post(() -> userAdapter.notifyDataSetChanged());
+    }
+
+    private void handleDatabaseError(DatabaseError error) {
+        // Handle database error
+        String errorMessage = "Database Error: " + error.getMessage();
+
+        // Log the error with stack trace
+        Log.e("ChatFragment", errorMessage, error.toException());
+
+        // Display a toast message
+        if (getContext() != null) {
+            Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
+        }
+
+        // If needed, you can further handle the error or take appropriate actions.
+        // For example, you might want to update the UI to inform the user about the error.
+        // Consider displaying a placeholder or retry option.
     }
 }

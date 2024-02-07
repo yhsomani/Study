@@ -1,5 +1,3 @@
-// AccountFragment.java
-
 package com.example.study;
 
 import android.app.Dialog;
@@ -14,7 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
@@ -39,15 +36,10 @@ public class AccountFragment extends Fragment {
     private TextView textViewStudentId;
     private TextView textViewEmail;
     private CircleImageView profileImg;
-    private boolean isLoadingUserData = false;
+    private ProgressDialog progressDialog;
     private DatabaseReference userReference;
     private FirebaseUser currentUser;
-
-    // Progress dialog to show loading or updating status
-    private ProgressDialog progressDialog;
-    Button logoutBtn;
-    Button yes;
-    Button no;
+    private Button logoutBtn;
 
     // Default constructor
     public AccountFragment() {
@@ -89,32 +81,7 @@ public class AccountFragment extends Fragment {
         profileImg = view.findViewById(R.id.profileImg);
         logoutBtn = view.findViewById(R.id.logoutbtn);
 
-        logoutBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Dialog dialog = new Dialog(getActivity(), R.style.dialoge);
-                dialog.setContentView(R.layout.dialog_layout);
-                Button no,yes;
-                yes = dialog.findViewById(R.id.yesbtn);
-                no = dialog.findViewById(R.id.nobtn);
-                yes.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        FirebaseAuth.getInstance().signOut();
-                        Intent intent = new Intent(getActivity(), LoginActivity.class);
-                        startActivity(intent);
-                        dialog.dismiss();
-                    }
-                });
-                no.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-                dialog.show();
-            }
-        });
+        logoutBtn.setOnClickListener(v -> showLogoutDialog());
 
         // Firebase
         FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -127,8 +94,7 @@ public class AccountFragment extends Fragment {
 
     // Load user data from Firebase
     private void loadUserData() {
-        if (currentUser != null && !isLoadingUserData) {
-            isLoadingUserData = true;
+        if (currentUser != null) {
             progressDialog = new ProgressDialog(getContext());
             progressDialog.setMessage("Loading User Data...");
             progressDialog.show();
@@ -137,7 +103,6 @@ public class AccountFragment extends Fragment {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     progressDialog.dismiss(); // Dismiss the progress dialog once data is fetched
-                    isLoadingUserData = false;
 
                     if (snapshot.exists()) {
                         Users user = snapshot.getValue(Users.class);
@@ -156,7 +121,6 @@ public class AccountFragment extends Fragment {
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
                     progressDialog.dismiss(); // Dismiss the progress dialog in case of error
-                    isLoadingUserData = false;
                     Toast.makeText(getContext(), "Error loading user data", Toast.LENGTH_SHORT).show();
                 }
             });
@@ -165,7 +129,7 @@ public class AccountFragment extends Fragment {
 
     // Load profile image using Glide
     private void loadProfileImage(String profileImageUrl) {
-        if (getContext() != null && (profileImg != null)) {
+        if (getContext() != null && profileImg != null) {
             if (profileImageUrl == null || profileImageUrl.isEmpty()) {
                 // Use default profile image if the user's profile image is not available
                 profileImg.setImageResource(R.drawable.user_profile);
@@ -193,5 +157,24 @@ public class AccountFragment extends Fragment {
         // Dismiss the progress dialog after the update is complete
         progressDialog.dismiss();
         Toast.makeText(getContext(), "Profile updated successfully", Toast.LENGTH_SHORT).show();
+    }
+
+    // Show logout confirmation dialog
+    private void showLogoutDialog() {
+        Dialog dialog = new Dialog(requireActivity(), R.style.dialoge);
+        dialog.setContentView(R.layout.dialog_layout);
+        Button no = dialog.findViewById(R.id.nobtn);
+        Button yes = dialog.findViewById(R.id.yesbtn);
+
+        yes.setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            startActivity(intent);
+            dialog.dismiss();
+        });
+
+        no.setOnClickListener(v -> dialog.dismiss());
+
+        dialog.show();
     }
 }

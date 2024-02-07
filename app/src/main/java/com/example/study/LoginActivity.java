@@ -12,8 +12,8 @@ import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
 
-    TabLayout tabLayout;
-    ViewPager viewPager;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,19 +28,34 @@ public class LoginActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.viewPager);
 
         // Task 3: Add tabs to the TabLayout ("Login" and "Register")
-        tabLayout.addTab(tabLayout.newTab().setText("Login"));
-        tabLayout.addTab(tabLayout.newTab().setText("Register"));
-
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        addTabsToTabLayout();
 
         // Task 4: Create an adapter for managing tabs
-        final ManageTabAdapter adapter = new ManageTabAdapter(this, getSupportFragmentManager(), tabLayout.getTabCount());
-        viewPager.setAdapter(adapter);
+        ManageTabAdapter adapter = createTabAdapter();
 
         // Task 5: Set up ViewPager to respond to page changes
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        configureViewPager(adapter);
 
         // Task 6: Set up TabLayout to respond to tab selection
+        configureTabLayout(adapter);
+    }
+
+    private void addTabsToTabLayout() {
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.login_tab_title))); // Replace with your login tab title resource
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.register_tab_title))); // Replace with your register tab title resource
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+    }
+
+    private ManageTabAdapter createTabAdapter() {
+        return new ManageTabAdapter(this, getSupportFragmentManager(), tabLayout.getTabCount());
+    }
+
+    private void configureViewPager(ManageTabAdapter adapter) {
+        viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+    }
+
+    private void configureTabLayout(final ManageTabAdapter adapter) {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {

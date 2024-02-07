@@ -1,4 +1,3 @@
-// UserAdapter.java
 package com.example.study;
 
 import android.content.Context;
@@ -6,83 +5,63 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
-
-    // Context to be used in the adapter
     private final Context context;
+    private final ArrayList<Users> usersList;
+    private static final String DEFAULT_PROFILE_IMAGE_URL = "https://firebasestorage.googleapis.com/v0/b/study-5ab42.appspot.com/o/man-user-color-icon.png?alt=media&token=0998c3b8-8db6-4db0-ae74-669d2d3b57b1";
 
-    // ArrayList to hold user data
-    private final ArrayList<Users> usersArrayList;
-
-    // Default profile image URL
-    private static final String DEFAULT_PROFILE_IMAGE_URL = "https://firebasestorage.googleapis.com/v0/b/study-acbc9.appspot.com/o/man-user-color-icon.png?alt=media&token=4604a5d3-0554-4b11-bcc3-c28499e298f8";
-
-    // Constructor to initialize the adapter with context and user data
     public UserAdapter(Context context, ArrayList<Users> usersArrayList) {
         this.context = context;
-        this.usersArrayList = usersArrayList;
+        this.usersList = usersArrayList;
     }
 
-    // Inflates the user item layout and creates ViewHolder instances
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Inflate the user item layout
         View view = LayoutInflater.from(context).inflate(R.layout.user_item, parent, false);
         return new ViewHolder(view);
     }
 
-    // Binds user data to the ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        // Get the user at the current position
-        Users user = usersArrayList.get(position);
+        Users user = usersList.get(position);
 
         // Load profile image using the modified method
         loadProfileImage(user.getProfilepic(), holder.userProfile);
 
-        // Set user name and status in the ViewHolder
         holder.userName.setText(user.getUserName());
         holder.userStatus.setText(user.getStatus());
 
-        // Set click listener
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, ChatWindowActivity.class);
-                intent.putExtra("name", user.getUserName());
-                intent.putExtra("receiverImage", user.getProfilepic());
-                intent.putExtra("status",user.getStatus());
-                intent.putExtra("uid", user.getUserId());
-                context.startActivity(intent);
-            }
+        holder.itemView.setOnClickListener(view -> {
+            // Start ChatWindowActivity with user details
+            Intent intent = new Intent(context, ChatWindowActivity.class);
+            intent.putExtra("recipientName", user.getUserName());
+            intent.putExtra("recipientImage", user.getProfilepic());
+            intent.putExtra("recipientId", user.getUserId());
+            intent.putExtra("recipientStatus", user.getStatus());
+            context.startActivity(intent);
         });
     }
 
-    // Returns the total number of items in the dataset
     @Override
     public int getItemCount() {
-        return usersArrayList.size();
+        return usersList.size();
     }
 
-    // ViewHolder class to hold and manage the user item views
     public static class ViewHolder extends RecyclerView.ViewHolder {
         CircleImageView userProfile;
         TextView userName;
         TextView userStatus;
 
-        // Constructor to initialize the views in the ViewHolder
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             userProfile = itemView.findViewById(R.id.userProfile);
@@ -91,13 +70,25 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         }
     }
 
-    // Separate method to load profile image using Picasso
-    private void loadProfileImage(String profileImageUrl, CircleImageView imageView) {
-        if (profileImageUrl != null && !profileImageUrl.isEmpty()) {
-            Picasso.get().load(profileImageUrl).into(imageView);
-        } else {
-            // If no profile image, load the default image
-            Picasso.get().load(DEFAULT_PROFILE_IMAGE_URL).into(imageView);
+    // Load profile image using Picasso
+    private void loadProfileImage(String profileImageUrl, ImageView targetImageView) {
+        if (profileImageUrl == null || targetImageView == null) {
+            // If the profile image URL or target ImageView is null, do nothing
+            return;
         }
+
+        // Use Picasso to load the image into the target ImageView
+        Picasso.get().load(profileImageUrl).into(targetImageView, new Callback() {
+            @Override
+            public void onSuccess() {
+                // Image loaded successfully
+            }
+
+            @Override
+            public void onError(Exception e) {
+                // Handle error, set a placeholder image
+                targetImageView.setImageResource(android.R.drawable.ic_menu_report_image); // Placeholder image
+            }
+        });
     }
 }

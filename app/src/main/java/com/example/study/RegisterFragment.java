@@ -11,8 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -33,44 +33,36 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RegisterFragment extends Fragment {
 
-    // UI components
     private ImageButton visibilityButton;
     private EditText nameEditText, emailEditText, passwordEditText;
     private CircleImageView profileImageView;
     private final FirebaseAuth auth = FirebaseAuth.getInstance();
-    ProgressDialog progressDialog;
+    private ProgressDialog progressDialog;
 
     // Email pattern for validation
-    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    private final String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
-    // User selected image URI
     private Uri imageURI;
 
-    // Firebase components
-    FirebaseDatabase database;
-    FirebaseStorage storage;
+    private FirebaseStorage storage;
+    private FirebaseDatabase database;
 
     // URL for the uploaded image
-    String imageUri;
+    private String imageUri;
 
-    // Flag for password visibility
     private boolean isPasswordVisible = true;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_register, container, false);
 
-        // Initialize progress dialog
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setCancelable(false);
 
-        // Initialize Firebase components
         storage = FirebaseStorage.getInstance();
         database = FirebaseDatabase.getInstance();
 
-        // Initialize UI components
         Button registerButton = view.findViewById(R.id.register_btn);
         visibilityButton = view.findViewById(R.id.visible_btn);
         nameEditText = view.findViewById(R.id.register_name);
@@ -79,7 +71,6 @@ public class RegisterFragment extends Fragment {
         profileImageView = view.findViewById(R.id.userProfile);
         ImageView selectProfileImageView = view.findViewById(R.id.imageView6);
 
-        // Set click listeners
         visibilityButton.setOnClickListener(v -> togglePasswordVisibility());
         profileImageView.setOnClickListener(v -> openImagePicker());
         selectProfileImageView.setOnClickListener(v -> openImagePicker());
@@ -173,7 +164,7 @@ public class RegisterFragment extends Fragment {
     }
 
     // Task 8: Handle registration result
-    private void handleRegistrationResult(@Nullable @org.jetbrains.annotations.Nullable Task<Void> task) {
+    private void handleRegistrationResult(@Nullable Task<Void> task) {
         progressDialog.dismiss();
 
         if (task != null && task.isSuccessful()) {
@@ -187,10 +178,8 @@ public class RegisterFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
+        // Task 9: Load selected image into CircleImageView
         if (requestCode == 10 && data != null) {
-            // Task 9: Load selected image into CircleImageView
             imageURI = data.getData();
             Picasso.get().load(imageURI).into(profileImageView);
         }

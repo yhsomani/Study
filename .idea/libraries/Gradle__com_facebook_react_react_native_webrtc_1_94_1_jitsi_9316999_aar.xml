@@ -1,11 +1,11 @@
 <component name="libraryTable">
   <library name="Gradle: com.facebook.react:react-native-webrtc:1.94.1-jitsi-9316999@aar" external-system-id="GRADLE">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ea2419aa1982cb61b8ad46b05cb34460/transformed/jetified-react-native-webrtc-1.94.1-jitsi-9316999/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/ea2419aa1982cb61b8ad46b05cb34460/transformed/jetified-react-native-webrtc-1.94.1-jitsi-9316999/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ea2419aa1982cb61b8ad46b05cb34460/transformed/jetified-react-native-webrtc-1.94.1-jitsi-9316999/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/ea2419aa1982cb61b8ad46b05cb34460/transformed/jetified-react-native-webrtc-1.94.1-jitsi-9316999/jars/libs/libjingle_peerconnection.so.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/ea2419aa1982cb61b8ad46b05cb34460/transformed/jetified-react-native-webrtc-1.94.1-jitsi-9316999/jars/libs/libwebrtc.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/b79fc11a72a0029f184b450f07011bb6/transformed/jetified-react-native-webrtc-1.94.1-jitsi-9316999/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/b79fc11a72a0029f184b450f07011bb6/transformed/jetified-react-native-webrtc-1.94.1-jitsi-9316999/jars/libs/libwebrtc.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/b79fc11a72a0029f184b450f07011bb6/transformed/jetified-react-native-webrtc-1.94.1-jitsi-9316999/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/b79fc11a72a0029f184b450f07011bb6/transformed/jetified-react-native-webrtc-1.94.1-jitsi-9316999/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/b79fc11a72a0029f184b450f07011bb6/transformed/jetified-react-native-webrtc-1.94.1-jitsi-9316999/jars/libs/libjingle_peerconnection.so.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

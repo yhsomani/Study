@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!-- Updated XML layout for activity_chat_window -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,8 +7,9 @@
     android:background="@drawable/gradient_background"
     tools:context=".ChatWindowActivity">
 
+    <!-- User profile section -->
     <LinearLayout
-        android:id="@+id/linearlayout1"
+        android:id="@+id/userProfileLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -20,8 +21,9 @@
         android:gravity="center"
         android:orientation="horizontal">
 
+        <!-- Profile image -->
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/userProfile"
+            android:id="@+id/userImage"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_gravity="center"
@@ -29,6 +31,7 @@
             app:civ_border_color="#FF000000"
             app:civ_border_width="2dp" />
 
+        <!-- User details -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -36,6 +39,7 @@
             android:layout_marginLeft="10dp"
             android:orientation="vertical">
 
+            <!-- User name -->
             <TextView
                 android:id="@+id/receiverName"
                 android:layout_width="match_parent"
@@ -46,6 +50,7 @@
                 android:textSize="20sp"
                 app:fontFamily="@font/play_bold" />
 
+            <!-- User status -->
             <TextView
                 android:id="@+id/receiverStatus"
                 android:layout_width="match_parent"
@@ -58,15 +63,17 @@
         </LinearLayout>
     </LinearLayout>
 
+    <!-- Message RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/messageRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/linearlayout1"
+        android:layout_below="@+id/userProfileLayout"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:padding="13dp" />
 
+    <!-- Message input section -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -79,6 +86,7 @@
         android:layout_marginBottom="3dp"
         android:orientation="horizontal">
 
+        <!-- Message input field -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="45dp"
@@ -89,7 +97,7 @@
             android:layout_weight="1">
 
             <EditText
-                android:id="@+id/TextMessage"
+                android:id="@+id/textMessage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -99,6 +107,7 @@
                 android:textSize="15sp" />
         </androidx.cardview.widget.CardView>
 
+        <!-- Send button -->
         <androidx.cardview.widget.CardView
             android:id="@+id/sendCardViewButton"
             android:layout_width="45dp"

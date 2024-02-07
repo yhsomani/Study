@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,20 +29,21 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ChatWindowActivity extends AppCompatActivity {
 
-    public static String receiverImage;
-    public static String senderImg;
-    String receiverImg, senderRoom, receiverRoom, receiverUid, receiverName, receiverStatus, senderUid;
-    private CircleImageView profileImage;
-    private TextView profileName;
-    private TextView statusTextView;
+    private String receiverImg, receiverUid, receiverName, senderUid, receiverStatus;
+    private CircleImageView profile;
+    private TextView receiverNameTextView, receiverStatusTextView;
+    private FirebaseDatabase database;
+    private FirebaseAuth firebaseAuth;
     private ImageButton sendButton;
     private EditText textMessage;
-    private FirebaseAuth firebaseAuth;
-    private FirebaseDatabase firebaseDatabase;
-    ArrayList<MessageModel> messagesArrayList;
     private RecyclerView messageRecyclerView;
+    private ArrayList<MessageModel> messagesArrayList;
     private MessagesAdapter messagesAdapter;
-    CardView cardViewButton;
+
+    private String senderRoom, receiverRoom;
+
+    private static String senderImg;
+    private static String receiverImgStatic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,131 +51,118 @@ public class ChatWindowActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat_window);
         getSupportActionBar().hide();
 
+        initializeViews();
+        setupRecyclerView();
+
+        database = FirebaseDatabase.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
-        firebaseDatabase = FirebaseDatabase.getInstance();
 
-        profileImage = findViewById(R.id.userProfile);
-        profileName = findViewById(R.id.receiverName);
-        statusTextView = findViewById(R.id.receiverStatus);
+        retrieveIntentData();
+
+        loadChatMessages();
+
+        configureSendButton();
+    }
+
+    private void initializeViews() {
+        receiverStatusTextView = findViewById(R.id.receiverStatus);
         sendButton = findViewById(R.id.sendButton);
-        textMessage = findViewById(R.id.TextMessage);
+        textMessage = findViewById(R.id.textMessage);
+        receiverNameTextView = findViewById(R.id.receiverName);
+        profile = findViewById(R.id.userImage);
         messageRecyclerView = findViewById(R.id.messageRecyclerView);
-        cardViewButton = findViewById(R.id.sendCardViewButton);
+    }
 
-        // Initialize messagesArrayList
+    private void setupRecyclerView() {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setStackFromEnd(true);
+        messageRecyclerView.setLayoutManager(linearLayoutManager);
         messagesArrayList = new ArrayList<>();
+        messagesAdapter = new MessagesAdapter(ChatWindowActivity.this, messagesArrayList);
+        messageRecyclerView.setAdapter(messagesAdapter);
+    }
 
-        if (getIntent() != null) {
-            receiverImg = getIntent().getStringExtra("receiverImage");
-            receiverName = getIntent().getStringExtra("name");
-            receiverStatus = getIntent().getStringExtra("status");
-            receiverUid = getIntent().getStringExtra("receiverUid");
-        }
+    private void retrieveIntentData() {
+        receiverName = getIntent().getStringExtra("recipientName");
+        receiverImg = getIntent().getStringExtra("recipientImage");
+        receiverUid = getIntent().getStringExtra("recipientId");
+        receiverStatus = getIntent().getStringExtra("recipientStatus");
 
-        if (receiverImage != null) {
-            Picasso.get().load(receiverImg).into(profileImage);
-        }
-
-        if (receiverName != null) {
-            profileName.setText(receiverName);
-        }
-
-        if (receiverStatus != null) {
-            statusTextView.setText(receiverStatus);
-        }
-
-        DatabaseReference reference = firebaseDatabase.getReference().child("user").child(firebaseAuth.getUid());
-        DatabaseReference chatReference;
-
-        if (senderRoom != null && receiverRoom != null) {
-            chatReference = firebaseDatabase.getReference().child("chats").child(senderRoom).child("messages");
-            chatReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    messagesArrayList.clear();
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        MessageModel messages = dataSnapshot.getValue(MessageModel.class);
-                        messagesArrayList.add(messages);
-                    }
-                    messagesAdapter.notifyDataSetChanged();
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    // Handle database error if needed
-                }
-            });
-        } else {
-            // Handle the case where senderRoom or receiverRoom is null
-            // You might want to show an error message or take appropriate action
-        }
-
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                senderImg = snapshot.child("profilepic").getValue().toString();
-                receiverImage = receiverImg;
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // Handle database error if needed
-            }
-        });
+        Picasso.get().load(receiverImg).into(profile);
+        receiverNameTextView.setText(receiverName);
+        receiverStatusTextView.setText(receiverStatus);
 
         senderUid = firebaseAuth.getUid();
         senderRoom = senderUid + receiverUid;
         receiverRoom = receiverUid + senderUid;
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setStackFromEnd(true);
-        messageRecyclerView.setLayoutManager(layoutManager);
+        // Set values for static variables
+        senderImg = "URL_TO_YOUR_SENDER_IMAGE"; // Replace with the actual URL
+        receiverImgStatic = "URL_TO_YOUR_RECEIVER_IMAGE"; // Replace with the actual URL
+    }
 
-        // Initialize messagesAdapter
-        messagesAdapter = new MessagesAdapter(ChatWindowActivity.this, messagesArrayList);
-        messageRecyclerView.setAdapter(messagesAdapter);
+    public static String getSenderImg() {
+        return senderImg;
+    }
 
+    public static String getReceiverImgStatic() {
+        return receiverImgStatic;
+    }
 
-        sendButton.setOnClickListener(new View.OnClickListener() {
+    private void loadChatMessages() {
+        DatabaseReference chatReference = database.getReference().child("chats").child(senderRoom).child("messages");
+        chatReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View v) {
-                handleSendButtonClick();
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                messagesArrayList.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    MessageModel message = dataSnapshot.getValue(MessageModel.class);
+                    messagesArrayList.add(message);
+                }
+                messagesAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(ChatWindowActivity.this, "Database Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void handleSendButtonClick() {
-        String message = textMessage.getText().toString();
-        if (message.isEmpty()) {
-            Toast.makeText(ChatWindowActivity.this, "Enter The Message First", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        textMessage.setText("");
-        Date date = new Date();
-        MessageModel messages = new MessageModel(message, senderUid, date.getTime());
+    private void configureSendButton() {
+        sendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendMessage();
+            }
+        });
+    }
 
-        if (senderRoom != null && receiverRoom != null) {
-            firebaseDatabase.getReference().child("chats")
-                    .child(senderRoom)
-                    .child("messages")
-                    .push().setValue(messages)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            firebaseDatabase.getReference().child("chats")
-                                    .child(receiverRoom)
-                                    .child("messages")
-                                    .push().setValue(messages).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            // Handle completion if needed
-                                        }
-                                    });
-                        }
-                    });
+    private void sendMessage() {
+        String messageText = textMessage.getText().toString().trim();
+        if (!messageText.isEmpty()) {
+            Date date = new Date();
+            MessageModel newMessage = new MessageModel(messageText, senderUid, date.getTime());
+
+            saveMessage(senderRoom, newMessage);
+            saveMessage(receiverRoom, newMessage);
+
+            // Clear the input field after sending the message
+            textMessage.setText("");
         } else {
-            // Handle the case where senderRoom or receiverRoom is null
-            // You might want to show an error message or take appropriate action
+            Toast.makeText(ChatWindowActivity.this, "Enter The Message First", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void saveMessage(String room, MessageModel message) {
+        database.getReference().child("chats").child(room).child("messages").push().setValue(message)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (!task.isSuccessful()) {
+                            Toast.makeText(ChatWindowActivity.this, "Failed to send message", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 }

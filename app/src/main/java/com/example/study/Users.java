@@ -1,14 +1,12 @@
-/*
- * Users.java
- * Model class representing user information.
- */
-
 package com.example.study;
 
 public class Users {
 
+    private static final String DEFAULT_PROFILE_IMAGE_URL = "https://firebasestorage.googleapis.com/v0/b/study-5ab42.appspot.com/o/man-user-color-icon.png?alt=media&token=0998c3b8-8db6-4db0-ae74-669d2d3b57b1";
+
     // Default constructor required for Firebase
     public Users() {
+        // Firebase uses this default constructor for deserialization
     }
 
     // Parameterized constructor for creating user instances
@@ -21,68 +19,65 @@ public class Users {
         this.status = status;
     }
 
-    // Private fields representing user attributes
     private String profilepic, mail, userName, password, userId, status;
 
-    // Getter and setter methods for accessing and updating user attributes
-
-    // Get the profile picture URL
     public String getProfilepic() {
-        return profilepic;
+        return (profilepic != null && !profilepic.isEmpty()) ? profilepic : DEFAULT_PROFILE_IMAGE_URL;
     }
 
-    // Set the profile picture URL
     public void setProfilepic(String profilepic) {
         this.profilepic = profilepic;
     }
 
-    // Get the user's email
     public String getMail() {
         return mail;
     }
 
-    // Set the user's email
     public void setMail(String mail) {
         this.mail = mail;
     }
 
-    // Get the user's username
     public String getUserName() {
         return userName;
     }
 
-    // Set the user's username
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
-    // Get the user's password
     public String getPassword() {
         return password;
     }
 
-    // Set the user's password
     public void setPassword(String password) {
         this.password = password;
     }
 
-    // Get the user's unique ID
     public String getUserId() {
         return userId;
     }
 
-    // Set the user's unique ID
     public void setUserId(String userId) {
         this.userId = userId;
     }
 
-    // Get the user's status
     public String getStatus() {
         return status;
     }
 
-    // Set the user's status
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Users{" +
+                "profilepic='" + profilepic + '\'' +
+                ", mail='" + mail + '\'' +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", userId='" + userId + '\'' +
+                ", status='" + status + '\'' +
+                '}';
     }
 }

@@ -21,7 +21,9 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         // Hide action bar
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
 
         // Load animations
         Animation topAnim = AnimationUtils.loadAnimation(this, R.anim.top_animation);
@@ -35,20 +37,29 @@ public class SplashActivity extends AppCompatActivity {
         TextView own2 = findViewById(R.id.ownTwo);
 
         // Set animations on views
-        logo.setAnimation(topAnim);
-        name.setAnimation(topAnim);
-        slogan.setAnimation(topAnim);
-        own1.setAnimation(bottomAnim);
-        own2.setAnimation(bottomAnim);
+        setAnimation(logo, topAnim);
+        setAnimation(name, topAnim);
+        setAnimation(slogan, topAnim);
+        setAnimation(own1, bottomAnim);
+        setAnimation(own2, bottomAnim);
 
         // Handle splash screen timeout
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                // Start the main activity and finish the splash activity
-                startActivity(new Intent(SplashActivity.this, MainActivity.class));
-                finish();
-            }
-        }, SPLASH_TIME_OUT);
+        new Handler().postDelayed(this::startMainActivity, SPLASH_TIME_OUT);
+    }
+
+    // Method to set animation on a view
+    private void setAnimation(ImageView view, Animation animation) {
+        if (view != null) view.setAnimation(animation);
+    }
+
+    // Method to set animation on a view
+    private void setAnimation(TextView view, Animation animation) {
+        if (view != null) view.setAnimation(animation);
+    }
+
+    // Method to start the main activity and finish the splash activity
+    private void startMainActivity() {
+        startActivity(new Intent(SplashActivity.this, MainActivity.class));
+        finish();
     }
 }

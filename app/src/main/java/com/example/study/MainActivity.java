@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -48,9 +47,9 @@ public class MainActivity extends AppCompatActivity {
 
     // Open a fragment in the container
     private void openFragment(Fragment fragment) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.container, fragment);
-        transaction.commit(); // Use commitNow() if immediate execution is desired
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, fragment)
+                .commit(); // Use commitNow() if immediate execution is desired
     }
 
     // Navigation item selection listener
@@ -60,31 +59,40 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     Fragment fragment = null;
+                    String title = "";
+
                     switch (item.getItemId()) {
                         case R.id.QR_Code:
                             // TODO: Add QR code fragment
-                            getSupportActionBar().setTitle("QR-Code Scanner");
+                            title = "QR-Code Scanner";
                             break;
                         case R.id.Chat:
-                            getSupportActionBar().setTitle("Chat");
+                            title = "Chat";
                             fragment = ChatFragment.newInstance("", "");
                             break;
                         case R.id.Notice:
-                            getSupportActionBar().setTitle("NoticeBoard");
+                            title = "NoticeBoard";
                             fragment = NoticeFragment.newInstance("", "");
                             break;
                         case R.id.Account:
-                            getSupportActionBar().setTitle("Account");
+                            title = "Account";
                             fragment = AccountFragment.newInstance("", "");
                             break;
                         default:
-                            getSupportActionBar().setTitle("Meet");
+                            title = "Meet";
                             fragment = MeetFragment.newInstance("", "");
                             break;
                     }
+
+                    // Set action bar title
+                    getSupportActionBar().setTitle(title);
+
                     // Open the selected fragment
-                    openFragment(fragment);
-                    return true;
+                    if (fragment != null) {
+                        openFragment(fragment);
+                        return true;
+                    }
+                    return false;
                 }
             };
 }

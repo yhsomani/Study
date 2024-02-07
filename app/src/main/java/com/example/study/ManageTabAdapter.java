@@ -1,4 +1,3 @@
-// ManageTabAdapter.java
 package com.example.study;
 
 import android.content.Context;
@@ -9,13 +8,13 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 public class ManageTabAdapter extends FragmentPagerAdapter {
 
-    private final Context myContext;
+    private final Context context;
     private final int totalTabs;
 
     // Constructor to initialize the context and totalTabs
     public ManageTabAdapter(Context context, FragmentManager fm, int totalTabs) {
-        super(fm);
-        myContext = context;
+        super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT); // Use BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT for better performance
+        this.context = context;
         this.totalTabs = totalTabs;
     }
 
@@ -40,4 +39,18 @@ public class ManageTabAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return totalTabs;
     }
+
+    // Add this method to set the title for each tab
+    @Override
+    public CharSequence getPageTitle(int position) {
+        switch (position) {
+            case 0:
+                return context.getString(R.string.login_tab_title); // Replace with your login tab title resource
+            case 1:
+                return context.getString(R.string.register_tab_title); // Replace with your register tab title resource
+            default:
+                return super.getPageTitle(position);
+        }
+    }
+
 }

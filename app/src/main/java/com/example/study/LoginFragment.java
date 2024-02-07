@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.text.method.TransformationMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,26 +16,23 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginFragment extends Fragment {
 
     // UI components
-    Button loginBtn;
-    ImageButton visibilityBtn;
-    Boolean isPasswordVisible = true;
-    EditText emailEditText, passwordEditText;
+    private Button loginBtn;
+    private ImageButton visibilityBtn;
+    private Boolean isPasswordVisible = true;
+    private EditText emailEditText, passwordEditText;
 
     // Firebase Authentication
-    FirebaseAuth auth;
+    private FirebaseAuth auth;
 
     // Progress dialog for login process
-    ProgressDialog progressDialog;
+    private ProgressDialog progressDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,34 +49,21 @@ public class LoginFragment extends Fragment {
         auth = FirebaseAuth.getInstance();
 
         // Set click listeners
-        visibilityBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                togglePasswordVisibility();
-            }
-        });
+        visibilityBtn.setOnClickListener(v -> togglePasswordVisibility());
 
-        loginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loginUser();
-            }
-        });
+        loginBtn.setOnClickListener(v -> loginUser());
 
         return view;
     }
 
     // Toggle password visibility
     private void togglePasswordVisibility() {
-        if (isPasswordVisible) {
-            passwordEditText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-            visibilityBtn.setImageResource(R.drawable.ic_invisibility);
-            passwordEditText.setHint("Password");
-        } else {
-            passwordEditText.setTransformationMethod(PasswordTransformationMethod.getInstance());
-            visibilityBtn.setImageResource(R.drawable.ic_visibility);
-            passwordEditText.setHint("********");
-        }
+        TransformationMethod transformationMethod = isPasswordVisible ?
+                HideReturnsTransformationMethod.getInstance() : PasswordTransformationMethod.getInstance();
+
+        passwordEditText.setTransformationMethod(transformationMethod);
+        visibilityBtn.setImageResource(isPasswordVisible ? R.drawable.ic_invisibility : R.drawable.ic_visibility);
+        passwordEditText.setHint(isPasswordVisible ? "Password" : "********");
         isPasswordVisible = !isPasswordVisible;
     }
 
@@ -105,24 +90,17 @@ public class LoginFragment extends Fragment {
         showProgressDialog("Logging in...");
 
         // Sign in with Firebase Authentication
-        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                hideProgressDialog();
+        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+            hideProgressDialog();
 
-                if (task.isSuccessful()) {
-                    try {
-                        // If login is successful, start the main activity
-                        startActivity(new Intent(getActivity(), MainActivity.class));
-                        // Finish the current activity to prevent the user from coming back to the login screen
-                        getActivity().finish();
-                    } catch (Exception e) {
-                        showError(e.getMessage());
-                    }
-                } else {
-                    // If login fails, show error message
-                    showError(task.getException().getMessage());
-                }
+            if (task.isSuccessful()) {
+                // If login is successful, start the main activity
+                startActivity(new Intent(getActivity(), MainActivity.class));
+                // Finish the current activity to prevent the user from coming back to the login screen
+                getActivity().finish();
+            } else {
+                // If login fails, show error message
+                showError(task.getException().getMessage());
             }
         });
     }
