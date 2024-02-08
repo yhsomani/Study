@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="gcm_defaultSenderId" translatable="false">561528115017</string>
-    <string name="google_api_key" translatable="false">AIzaSyAhX8Ut-Gt38NqfO5wvYthhiZwpHHopuyw</string>
-    <string name="google_app_id" translatable="false">1:561528115017:android:64aed03b89ba0372ce9498</string>
-    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAhX8Ut-Gt38NqfO5wvYthhiZwpHHopuyw</string>
-    <string name="google_storage_bucket" translatable="false">study-5ab42.appspot.com</string>
-    <string name="project_id" translatable="false">study-5ab42</string>
-</resources>

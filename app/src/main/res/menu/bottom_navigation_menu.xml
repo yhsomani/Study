@@ -7,8 +7,8 @@
         android:title="Meet" />
     <item
         android:id="@+id/QR_Code"
-        android:icon="@drawable/qr_code_scanner"
-        android:title="QR Scanner" />
+        android:icon="@drawable/whiteboard"
+        android:title="White Board" />
     <item
         android:id="@+id/Chat"
         android:icon="@drawable/chaticon"

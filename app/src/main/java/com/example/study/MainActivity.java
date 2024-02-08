@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.study.whiteboard.WhiteBoardFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -64,7 +65,8 @@ public class MainActivity extends AppCompatActivity {
                     switch (item.getItemId()) {
                         case R.id.QR_Code:
                             // TODO: Add QR code fragment
-                            title = "QR-Code Scanner";
+                            title = "White Board";
+                            fragment = WhiteBoardFragment.newInstance("", "");
                             break;
                         case R.id.Chat:
                             title = "Chat";
