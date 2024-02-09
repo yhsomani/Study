@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="1dp"
     android:background="@drawable/relative_border">
 
     <LinearLayout
@@ -14,8 +15,8 @@
             android:id="@+id/profileImage"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginEnd="10dp"
             android:layout_gravity="center"
+            android:layout_marginEnd="10dp"
             android:src="@drawable/user_profile" />
 
         <LinearLayout
@@ -37,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Status"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
