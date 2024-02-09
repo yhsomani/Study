@@ -197,6 +197,7 @@
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.code.gson:gson:2.8.6" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.github.bumptech.glide:disklrucache:4.16.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.github.bumptech.glide:annotations:4.16.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.itextpdf:itextpdf:5.5.13.2" level="project" />
   </component>
   <component name="SonarLintModuleSettings">
     <option name="uniqueId" value="11cafedd-013c-4a32-8403-0717a8e0272c" />

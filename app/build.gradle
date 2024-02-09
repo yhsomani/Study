@@ -1,7 +1,6 @@
-plugins {
-    id 'com.android.application'
-    id 'com.google.gms.google-services'
-}
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
+
 android {
     compileSdk 34
     defaultConfig {
@@ -38,21 +37,17 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-//    jitsi meet
+
     implementation ('org.jitsi.react:jitsi-meet-sdk:4.1.0') { transitive = true }
-//    Dynamic Screen Size
+
     implementation 'com.intuit.sdp:sdp-android:1.1.0'
-
-//    Circular Image Icon
     implementation 'de.hdodenhof:circleimageview:3.1.0'
-
-    implementation 'com.github.bumptech.glide:glide:4.16.0' // Use the latest version available
+    implementation 'com.github.bumptech.glide:glide:4.16.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
-
-//    picasso image view with custom properties and custom properties for the default properties
     implementation 'com.squareup.picasso:picasso:2.71828'
-//    White-Board
     implementation 'petrov.kristiyan:colorpicker-library:1.1.10'
 
+    implementation 'com.itextpdf:itextpdf:5.5.13.2'
 
 }
+

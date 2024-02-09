@@ -1,4 +1,5 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+
 buildscript {
     ext {
         agp_version = '8.2.2'
@@ -6,25 +7,17 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        jcenter()
         maven {
             url "https://github.com/jitsi/jitsi-maven-repository/raw/master/releases"
         }
-//        jcenter()
-
     }
     dependencies {
         classpath "com.android.tools.build:gradle:$agp_version"
         classpath 'com.google.gms:google-services:4.4.0'
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
     }
 }
 
 tasks.register('clean', Delete) {
     delete rootProject.buildDir
 }
-// alternative below =>
-//task clean(type: Delete) {
-//    delete rootProject.buildDir
-//}
