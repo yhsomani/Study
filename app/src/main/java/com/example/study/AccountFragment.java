@@ -33,8 +33,9 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -220,7 +221,7 @@ public class AccountFragment extends Fragment {
             String pdfPath = destinationDirectory + "/images.pdf";
 
             // Create instance of PdfWriter
-            PdfWriter.getInstance(document, new FileOutputStream(pdfPath));
+            PdfWriter.getInstance(document, Files.newOutputStream(Paths.get(pdfPath)));
 
             // Open the document to write
             document.open();
@@ -228,18 +229,16 @@ public class AccountFragment extends Fragment {
             for (Uri imageUri : imageUris) {
                 // Get input stream from image URI
                 try (InputStream imageStream = new BufferedInputStream(getContext().getContentResolver().openInputStream(imageUri))) {
-                    if (imageStream != null) {
-                        // Convert image stream to Bitmap
-                        Bitmap bitmap = BitmapFactory.decodeStream(imageStream);
+                    // Convert image stream to Bitmap
+                    Bitmap bitmap = BitmapFactory.decodeStream(imageStream);
 
-                        // Convert Bitmap to iText Image
-                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                        Image image = Image.getInstance(stream.toByteArray());
+                    // Convert Bitmap to iText Image
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                    Image image = Image.getInstance(stream.toByteArray());
 
-                        // Add image to document
-                        document.add(image);
-                    }
+                    // Add image to document
+                    document.add(image);
                 }
             }
 
