@@ -64,6 +64,11 @@
           <theme>@style/Theme.Study</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_pdf_creator.xml">
+        <config>
+          <theme>@style/Theme.Study</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_register.xml">
         <config>
           <theme>@style/Theme.Study</theme>
@@ -100,14 +105,15 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="39afe342-2abd-472b-b9b2-9be779057c12" name="Changes" comment="white board and chat working is done only thing is remaining to manage profile in chat list and save whiteboard images in pdf format">
-      <change beforePath="$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/app/Study.app.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/Study.app.main.iml" afterDir="false" />
+    <list default="true" id="39afe342-2abd-472b-b9b2-9be779057c12" name="Changes" comment="Some Warning fixed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_register.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_register.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_white_board.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_white_board.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/receiver_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/receiver_layout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/sender_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/sender_layout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/user_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/user_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values-night/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values-night/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,7 +126,7 @@
   <component name="CodeInsightWorkspaceSettings">
     <option name="optimizeImportsOnTheFly" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\ysoma\.android\avd\Pixel_6_Pro_API_34.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[1b87b5db]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -167,10 +173,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="valueResourceFile" />
         <option value="layoutResourceFile" />
         <option value="resourceFile" />
         <option value="Class" />
+        <option value="valueResourceFile" />
       </list>
     </option>
   </component>
@@ -186,7 +192,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="2" />
@@ -243,8 +249,14 @@
     <key name="android.template.-236453067">
       <recent name="com.example.study" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ysoma\StudioProjects\Study\app\src\main\res\drawable" />
+    </key>
     <key name="android.template.-1712894498">
       <recent name="com.example.study" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.example.study.chats" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -498,7 +510,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707417110129</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Some Warning fixed">
+      <option name="closed" value="true" />
+      <created>1707481208393</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1707481208393</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -533,7 +553,8 @@
     <MESSAGE value="something wrong with send button and message recycler View messages are not properly store on firebase need to re-modify the code" />
     <MESSAGE value="Subject: Fix: Ensure Proper Loading of Profile Photos in Chat Fragment&#10;&#10;Body:&#10;- Resolved an issue where profile photos were not loading correctly in the chat fragment.&#10;- Verified that the chat system is now functioning properly, with profile photos displaying as expected.&#10;- Remaining task: Ensure consistent loading of profile photos across all scenarios.&#10;&#10;This commit addresses the issue with profile photo loading in the chat fragment and confirms the chat system's proper functionality." />
     <MESSAGE value="white board and chat working is done only thing is remaining to manage profile in chat list and save whiteboard images in pdf format" />
-    <option name="LAST_COMMIT_MESSAGE" value="white board and chat working is done only thing is remaining to manage profile in chat list and save whiteboard images in pdf format" />
+    <MESSAGE value="Some Warning fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Some Warning fixed" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
 </project>

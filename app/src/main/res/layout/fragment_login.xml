@@ -8,7 +8,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/textView2"
@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="Welcome Again"
+            android:text="@string/welcome_again"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -31,12 +31,11 @@
             android:layout_marginTop="40dp"
             android:layout_marginEnd="10dp"
             android:background="@null"
-            android:hint="Email"
+            android:hint="@string/email"
             android:imeOptions="actionNext"
             android:inputType="textEmailAddress"
             android:paddingStart="40dp"
             android:paddingEnd="10dp"
-            android:text="l@gmail.com"
             android:textColorHint="#808080"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -74,18 +73,18 @@
             android:layout_marginTop="30dp"
             android:layout_marginEnd="45dp"
             android:background="@null"
-            android:hint="Password"
+            android:hint="@string/password"
             android:imeOptions="actionNext"
             android:inputType="textPassword"
             android:paddingStart="40dp"
             android:paddingEnd="10dp"
-            android:text="Yash@1234"
             android:textColorHint="#808080"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/login_email"
-            tools:ignore="TouchTargetSizeCheck" />
+            tools:ignore="TouchTargetSizeCheck"
+            android:autofillHints="" />
 
         <View
             android:id="@+id/viewDividerForPassword"
@@ -114,7 +113,7 @@
             android:id="@+id/imageButton"
             android:layout_width="27dp"
             android:layout_height="27dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
             android:backgroundTint="@android:color/transparent"
             android:contentDescription="@string/app_name"
             android:src="@drawable/ic_visibility"
@@ -130,7 +129,7 @@
             android:layout_marginTop="30dp"
             android:background="@drawable/edit_button"
             android:clickable="true"
-            android:text="Login"
+            android:text="@string/login_tab_title"
             android:textColor="#FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

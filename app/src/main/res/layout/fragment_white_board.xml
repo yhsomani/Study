@@ -24,7 +24,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:src="@drawable/ic_undo"
-                android:text="Undo" />
+                android:text="@string/undo"
+                android:contentDescription="@string/undo" />
 
             <ImageButton
                 android:id="@+id/btn_save"
@@ -32,7 +33,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:src="@drawable/ic_save_1"
-                android:text="Save" />
+                android:text="@string/save"
+                android:contentDescription="@string/save" />
 
             <ImageButton
                 android:id="@+id/btn_color"
@@ -40,7 +42,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:src="@drawable/ic_color"
-                android:text="Color" />
+                android:text="@string/color"
+                android:contentDescription="@string/color" />
 
             <ImageButton
                 android:id="@+id/btn_stroke"
@@ -48,7 +51,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:src="@drawable/ic_brush"
-                android:text="Stroke" />
+                android:text="@string/stroke"
+                android:contentDescription="@string/stroke" />
         </LinearLayout>
 
         <LinearLayout
@@ -71,7 +75,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
-                android:text="-"
+                android:text="@string/decrement"
                 android:textSize="20sp"
                 android:visibility="gone" />
 
@@ -80,7 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
-                android:text="+"
+                android:text="@string/Increment"
                 android:textSize="20sp"
                 android:visibility="gone" />
 
@@ -89,12 +93,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:autofillHints="Enter Pen Size"
                 android:backgroundTint="#FFFFFF"
                 android:ems="3"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:textColor="#FFFFFF"
                 android:textColorHint="#DADADA"
-                android:visibility="gone" />
+                android:visibility="gone"
+                tools:ignore="LabelFor" />
 
             <ImageButton
                 android:id="@+id/setvalue"
@@ -102,7 +108,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:src="@drawable/ic_checked"
-                android:visibility="gone" />
+                android:visibility="gone"
+                android:contentDescription="@string/set_value" />
 
         </LinearLayout>
 
