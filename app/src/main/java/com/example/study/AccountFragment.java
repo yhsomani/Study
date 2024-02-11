@@ -29,6 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Image;
+import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import java.io.BufferedInputStream;
@@ -226,19 +227,44 @@ public class AccountFragment extends Fragment {
             // Open the document to write
             document.open();
 
+            // Get page size
+            Rectangle pageSize = document.getPageSize();
+
             for (Uri imageUri : imageUris) {
                 // Get input stream from image URI
                 try (InputStream imageStream = new BufferedInputStream(getContext().getContentResolver().openInputStream(imageUri))) {
                     // Convert image stream to Bitmap
                     Bitmap bitmap = BitmapFactory.decodeStream(imageStream);
 
+                    // Scale image to fit the page
+                    float documentWidth = pageSize.getWidth() - document.leftMargin() - document.rightMargin();
+                    float documentHeight = pageSize.getHeight() - document.topMargin() - document.bottomMargin();
+                    float imageWidth = bitmap.getWidth();
+                    float imageHeight = bitmap.getHeight();
+                    float widthScale = documentWidth / imageWidth;
+                    float heightScale = documentHeight / imageHeight;
+                    float scaleFactor = Math.min(widthScale, heightScale);
+                    int scaledWidth = Math.round(imageWidth * scaleFactor);
+                    int scaledHeight = Math.round(imageHeight * scaleFactor);
+
+                    // Calculate X and Y coordinates to center-align the image
+                    float x = (documentWidth - scaledWidth) / 2;
+                    float y = (documentHeight - scaledHeight) / 2;
+
+                    // Resize the Bitmap
+                    Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, scaledWidth, scaledHeight, true);
+
                     // Convert Bitmap to iText Image
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                    scaledBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
                     Image image = Image.getInstance(stream.toByteArray());
+
+                    // Set image position
+                    image.setAbsolutePosition(x, y);
 
                     // Add image to document
                     document.add(image);
+                    document.newPage(); // Optional: Start a new page for each image
                 }
             }
 
@@ -251,7 +277,6 @@ public class AccountFragment extends Fragment {
             showToast("Error: " + e.getMessage());
         }
     }
-
 
     private void showToast(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
