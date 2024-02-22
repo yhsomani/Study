@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "561528115017",
-    "project_id": "study-5ab42",
-    "storage_bucket": "study-5ab42.appspot.com"
+    "project_number": "469781909203",
+    "project_id": "study-ccd4b",
+    "storage_bucket": "study-ccd4b.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:561528115017:android:64aed03b89ba0372ce9498",
+        "mobilesdk_app_id": "1:469781909203:android:95d304bafd07265e198e26",
         "android_client_info": {
           "package_name": "com.example.study"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAhX8Ut-Gt38NqfO5wvYthhiZwpHHopuyw"
+          "current_key": "AIzaSyCTy_lY35U0jvNZ29vd4SGDIKIdLpe86B0"
         }
       ],
       "services": {

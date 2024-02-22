@@ -1,4 +1,4 @@
-package com.example.study.whiteboard;
+package com.example.study.WhiteBoard;
 
 import android.content.ContentValues;
 import android.graphics.Bitmap;

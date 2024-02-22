@@ -1,4 +1,4 @@
-package com.example.study.chats;
+package com.example.study.Chats;
 
 public class MessageModel {
     private String message;

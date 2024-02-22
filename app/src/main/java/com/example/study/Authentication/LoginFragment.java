@@ -1,5 +1,5 @@
 // LoginFragment.java
-package com.example.study;
+package com.example.study.Authentication;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.study.MainActivity;
+import com.example.study.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginFragment extends Fragment {

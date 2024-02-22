@@ -1,4 +1,4 @@
-package com.example.study;
+package com.example.study.Authentication;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -19,6 +19,9 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.study.MainActivity;
+import com.example.study.R;
+import com.example.study.Users;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;

@@ -1,9 +1,12 @@
 // LoginActivity.java
-package com.example.study;
+package com.example.study.Authentication;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
+
+import com.example.study.ManageTabAdapter;
+import com.example.study.R;
 import com.google.android.material.tabs.TabLayout;
 import java.util.Objects;
 

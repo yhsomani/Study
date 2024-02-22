@@ -1,4 +1,4 @@
-package com.example.study.chats;
+package com.example.study.Chats;
 
 import android.os.Bundle;
 import android.view.View;

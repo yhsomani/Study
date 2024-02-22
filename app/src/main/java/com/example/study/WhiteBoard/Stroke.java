@@ -1,4 +1,4 @@
-package com.example.study.whiteboard;
+package com.example.study.WhiteBoard;
 /*
  ****************************
  * Develop by Yash Somani

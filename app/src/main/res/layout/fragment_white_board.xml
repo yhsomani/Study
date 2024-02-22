@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:background="@color/amp_blue"
     android:layout_height="match_parent"
-    tools:context=".whiteboard.WhiteBoardFragment">
+    tools:context=".WhiteBoard.WhiteBoardFragment">
 
     <LinearLayout
         android:id="@+id/linear"
@@ -115,7 +115,7 @@
 
     </LinearLayout>
 
-    <com.example.study.whiteboard.DrawView
+    <com.example.study.WhiteBoard.DrawView
         android:id="@+id/draw_view"
         android:background="@color/white"
         android:layout_width="match_parent"

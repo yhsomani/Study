@@ -9,8 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.example.study.chats.ChatFragment;
-import com.example.study.whiteboard.WhiteBoardFragment;
+import com.example.study.Authentication.LoginActivity;
+import com.example.study.Chats.ChatFragment;
+import com.example.study.WhiteBoard.WhiteBoardFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
